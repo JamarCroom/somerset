@@ -21,10 +21,10 @@ else
 	include 'include/head.inc';
 	if(isset($_POST['submit']))
 	{
-		require_once 'include/Validation.php';
+		require_once 'objects/Validation.php';
 		$validate = new Validation();
 		$contentArea=$validate->validateInput($_POST['contentAreas'],'Content area');
-		$indicatorTypes=$validate->validateInput($_POST['indicatorTypes'],'Indicator Types');
+		$indicatorTypes=$validate->validateInput($_POST['indicatorTypes'],'Indicator Type');
 
 		$errorCount = $validate->getErrorCount();
 		if($errorCount>0)
@@ -69,7 +69,7 @@ else
 <?php
 				foreach($result as $results)
 				{
-					echo '<tr><td>'.ucwords($results.['indicatorTitle'])'</td><td>'.$results['contentArea'].'<td/><td>'.$results['indicatorType'].'</td><td>'.$results['indicatorState'].'</td><td><form action="toggleState.php" method="POST"><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"><input type="hidden" name="toggleState" value="'.$results['indicatorState'].'"><button>On/Off</button></form></td></tr>';
+					echo '<tr><td>'.ucwords($results.['indicatorTitle']).'</td><td>'.$results['contentArea'].'<td/><td>'.$results['indicatorType'].'</td><td>'.$results['indicatorState'].'</td><td><form action="toggleState.php" method="POST"><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"><input type="hidden" name="toggleState" value="'.$results['indicatorState'].'"><button>On/Off</button></form></td></tr>';
 				}
 ?>
 			</table>
@@ -92,7 +92,7 @@ else
 <?php
 				foreach($result as $results)
 				{
-					echo '<tr><td>'.ucwords($results.['indicatorTitle'])'</td><td>'.$results['contentArea'].'<td/><td>'.$results['indicatorType'].'</td><td>'.$results['indicatorState'].'</td><td><form action="modify.php" method="POST"><input type="hidden" name="graphType" value="'.$results['graphType'].'"/><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"/><input type="submit" name="searchSubmit" value="Modify"/></form></td></tr>';
+					echo '<tr><td>'.ucwords($results.['indicatorTitle']).'</td><td>'.$results['contentArea'].'<td/><td>'.$results['indicatorType'].'</td><td>'.$results['indicatorState'].'</td><td><form action="modify.php" method="POST"><input type="hidden" name="graphType" value="'.$results['graphType'].'"/><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"/><input type="submit" name="searchSubmit" value="Modify"/></form></td></tr>';
 				}
 ?>
 			</table>
@@ -115,7 +115,7 @@ else
 	{
 ?>	
 		<form action="search.php?action=<?php echo $action;?>" method="POST">
-		<p>Select a content area: <select id="contentAreas"  name="contentArea" >
+		<p>Select a content area: <select id="contentAreas"  name="contentAreas" >
 			<option value=""></option>
 		<option value="adultPAN">Adult PAN</option>
 		<option value="youthPAN"> Youth PAN</option>
@@ -124,14 +124,14 @@ else
 		<option value="coalition">Coalition</option>
 		</select></p>
 
-		<p>Select an indicator type: <select id="indicatorTypes" name="indicatorType">
+		<p>Select an indicator type: <select id="indicatorTypes" name="indicatorTypes">
 		<option value=""></option>
 		<option value="goal">Program Goal</option>
 		<option value="outcome">Outcome</option>
 		<option value="environmentalSupports">Environmental Supports</option>
 		<option value="programReach">Program Reach</option>
 		</select></p>
-
+		<p><input type="submit" name="submit" /></p>
 		</form>
 <?php
 	}
