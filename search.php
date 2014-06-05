@@ -15,7 +15,7 @@ else
 	$searchForm=true;
 	$toggleTable=false;
 	$modifyTable=false;
-	$_GET['action']="toggle";
+	$_GET['action']="modify";
 	$action = $_GET['action'];
 
 	include 'include/head.inc';
@@ -37,7 +37,7 @@ else
 			try
 			{
 				require_once 'include/dbaseConnect.inc';
-				$query = 'SELECT * FROM indicatorMainTable WHERE contentArea = :contentArea AND indicatorTypes = :indicatorTypes';
+				$query = 'SELECT * FROM indicatorMainTable WHERE contentArea = :contentArea AND indicatorType = :indicatorTypes';
 				$statement=$db->prepare($query);
 				$statement->bindValue(':contentArea',$contentArea);
 				$statement->bindValue(':indicatorTypes',$indicatorTypes);
@@ -57,19 +57,19 @@ else
 		}
 
 
-
 	}
 	if($toggleTable)
 	{
 		if(!empty($result))
 		{
 ?>
+			<h2 class="center">Results</h2>
 			<table>
 				<thead><tr><th>Indicator Title</th><th>Content Area</th><th>Indicator Type</th><th>Indicator State</th><th>Toggle State</th><tr/></thead>
 <?php
 				foreach($result as $results)
 				{
-					echo '<tr><td>'.ucwords($results.['indicatorTitle']).'</td><td>'.$results['contentArea'].'<td/><td>'.$results['indicatorType'].'</td><td>'.$results['indicatorState'].'</td><td><form action="toggleState.php" method="POST"><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"><input type="hidden" name="toggleState" value="'.$results['indicatorState'].'"><button>On/Off</button></form></td></tr>';
+					echo '<tr><td>'.ucwords($results['indicatorTitle']).'</td><td>'.$results['contentArea'].'</td><td>'.$results['graphType'].'</td><td>'.$results['indicatorState'].'</td><td><form action="toggleState.php" method="POST"><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"><input type="hidden" name="toggleState" value="'.$results['indicatorState'].'"><input type="submit" name="submit" value="On/Off" /></form></td></tr>';
 				}
 ?>
 			</table>
@@ -87,12 +87,13 @@ else
 		if(!empty($result))
 		{
 ?>
+	<h2 class="center">Results</h2>
 			<table>
 				<thead><tr><th>Indicator Title</th><th>Content Area</th><th>Indicator Type</th><th>Indicator State</th><th>Modify</th><tr/></thead>
 <?php
 				foreach($result as $results)
 				{
-					echo '<tr><td>'.ucwords($results.['indicatorTitle']).'</td><td>'.$results['contentArea'].'<td/><td>'.$results['indicatorType'].'</td><td>'.$results['indicatorState'].'</td><td><form action="modify.php" method="POST"><input type="hidden" name="graphType" value="'.$results['graphType'].'"/><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"/><input type="submit" name="searchSubmit" value="Modify"/></form></td></tr>';
+					echo '<tr><td>'.ucwords($results['indicatorTitle']).'</td><td>'.$results['contentArea'].'</td><td>'.$results['graphType'].'</td><td>'.$results['indicatorState'].'</td><td><form action="modify.php" method="POST"><input type="hidden" name="graphType" value="'.$results['graphType'].'"/><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"/><input type="submit" name="searchSubmit" value="Modify"/></form></td></tr>';
 				}
 ?>
 			</table>

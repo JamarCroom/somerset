@@ -20,7 +20,7 @@ else
 		$validate = new Validation();
 		$contentArea=$validate->validateInput($_POST['contentArea'],'Content Area');
 		$indicatorType=$validate->validateInput($_POST['indicatorType'],'Indicator Type');
-		//echo $_POST['graphType'];
+		echo $_POST['graphType'];
 		$graphType=$validate->validateInput($_POST['graphType'],'Visualize your data');
 
 		$indicatorTitle=$validate->validAlphaNum($_POST['indicatorTitle'],'Indicator Title');
@@ -30,8 +30,8 @@ else
 		if($graphType=='speedometer'||$graphType=='barGraph'||$graphType=='arrowDown'||$graphType=='arrowUp')
 		{
 			$changeType=$validate->validateInput($_POST['changeType'],'Change Type');
-			$baselineValue=$validate->validNum($_POST['baselineValue'],'Baseline Value');
-			$followupValue=$validate->validNum($_POST['followupValue'],'Followup Value');
+			$baseline=$validate->validNum($_POST['baselineValue'],'Baseline Value');
+			$followUp=$validate->validNum($_POST['followupValue'],'Followup Value');
 		}
 		if($graphType=='barGraph'||$graphType=='lineGraph')
 		{
@@ -66,7 +66,7 @@ else
 			if($graphType=='barGraph')
 			{
 				$query="INSERT INTO indicatorMainTable(indicatorState, dateCreated,contentArea, indicatorType, graphType, indicatorTitle, measureUnit, targetLanguage, targetNumber) 
-				VALUES( :indicatorState, :dateCreated,:contentArea, :indicatorType, :graphType, :indicatorTitle, :measureUnit, :targetLanguage, :targetNumber)";
+				VALUES(:indicatorId, :indicatorState, :dateCreated,:contentArea, :indicatorType, :graphType, :indicatorTitle, :measureUnit, :targetLanguage, :targetNumber)";
 				
 				$statement=$db->prepare($query);
 				$statement->bindValue(':indicatorState','off');
@@ -79,24 +79,22 @@ else
 				$statement->bindValue(':targetLanguage',$targetLanguage);
 				$statement->bindValue(':targetNumber',$targetNumber);
 				$statement->execute();
-				$indicatorId=$db->lastInsertId();
+				$indicatorId=$statement->lastInsertId();
 				
 
-				$query2="INSERT INTO indicatorSecondaryTable(indicatorId, changeType, baselineValue, followupValue)VALUES(:indicatorId, :changeType, :baselineValue, :followupValue)";
+				$query2="INSERT INTO indicatorSecondaryTable(changeType, baselineValue, followupValue)VALUES(:indicatorId, :changeType, :baselineValue, :followupValue)";
 				$statement=$db->prepare($query2);
 				$statement->bindValue(':changeType',$changeType);
 				$statement->bindValue(':baselineValue',$baselineValue);
 				$statement->bindValue(':followupValue',$followupValue);
-				$statement->bindValue(':indicatorId',$indicatorId);
 				$statement->execute();
 
 
 
-				$query3="INSERT INTO indicatorTertiaryTable(indicatorId, xAxisTitle, yAxisTitle)VALUES(:indicatorId, :xAxisTitle, :yAxisTitle)";
+				$query3="INSERT INTO indicatorTertiaryTable( xAxisTitle, yAxisTitle)VALUES(:indicatorId, :xAxisTitle, :yAxisTitle)";
 				$statement=$db->prepare($query3);
 				$statement->bindValue(':xAxisTitle',$xAxisTitle);
 				$statement->bindValue(':yAxisTitle',$yAxisTitle);
-				$statement->bindValue(':indicatorId',$indicatorId);
 				$statement->execute();
 
 			}
@@ -104,7 +102,7 @@ else
 			if($graphType=='linegraph')
 			{
 				$query="INSERT INTO indicatorMainTable(indicatorState, dateCreated,contentArea, indicatorType, graphType, indicatorTitle, measureUnit, targetLanguage, targetNumber) 
-				VALUES( :indicatorState, :dateCreated,:contentArea, :indicatorType, :graphType, :indicatorTitle, :measureUnit, :targetLanguage, :targetNumber)";
+				VALUES(:indicatorId, :indicatorState, :dateCreated,:contentArea, :indicatorType, :graphType, :indicatorTitle, :measureUnit, :targetLanguage, :targetNumber)";
 				
 				$statement=$db->prepare($query);
 				$statement->bindValue(':indicatorState','off');
@@ -117,23 +115,21 @@ else
 				$statement->bindValue(':targetLanguage',$targetLanguage);
 				$statement->bindValue(':targetNumber',$targetNumber);
 				$statement->execute();
-				$indicatorId=$db->lastInsertId();
+				$indicatorId=$statement->lastInsertId();
 				
 
-				$query3="INSERT INTO indicatorTertiaryTable(indicatorId, xAxisTitle, yAxisTitle)VALUES(:indicatorId, :xAxisTitle, :yAxisTitle)";
+				$query3="INSERT INTO indicatorTertiaryTable(xAxisTitle, yAxisTitle)VALUES(:indicatorId, :xAxisTitle, :yAxisTitle)";
 				$statement=$db->prepare($query3);
 				$statement->bindValue(':xAxisTitle',$xAxisTitle);
 				$statement->bindValue(':yAxisTitle',$yAxisTitle);
-				$statement->bindValue(':indicatorId',$indicatorId);
 				$statement->execute();
 
-				$query2= "INSERT INTO yearsTable(year, yearData, indicatorId) VALUES(:year,:yearData, :indicatorId)";
+				$query2= "INSERT INTO yearsTable(year, yearData) VALUES() WHERE indicatorId=:indicatorId";
 				$statement=$db->prepare($query2);
 				foreach($years as $key=>$value)
 				{
 					$statement->bindValue(':year',$years[$key]);
 					$statement->bindValue(':yearData',$yearData[$key]);
-					$statement->bindValue(':indicatorId',$indicatorId);
 					$statement->execute();
 				}
 
@@ -156,22 +152,18 @@ else
 				$statement->bindValue(':targetLanguage',$targetLanguage);
 				$statement->bindValue(':targetNumber',$targetNumber);
 				$statement->execute();
-				$indicatorId=$db->lastInsertId();
+				$indicatorId=$statement->lastInsertId();
 				
 
-				$query2="INSERT INTO indicatorSecondaryTable(indicatorId, changeType, baselineValue, followupValue)VALUES(:indicatorId, :changeType, :baselineValue, :followupValue)";
+				$query2="INSERT INTO indicatorSecondaryTable(changeType, baselineValue, followupValue)VALUES(:indicatorId, :changeType, :baselineValue, :followupValue)";
 				$statement=$db->prepare($query2);
 				$statement->bindValue(':changeType',$changeType);
 				$statement->bindValue(':baselineValue',$baselineValue);
-				$statement->bindValue(':indicatorId',$indicatorId);
 				$statement->bindValue(':followupValue',$followupValue);
 				$statement->execute();
 			
 			}
 			$db->commit();
-			$buildForm = false;
-			echo '<p>You have successfully added an indicator to the database</p>';
-
 		}
 			catch(PDOException $e)
 			{
@@ -229,9 +221,9 @@ else
 
 
 
-			<p id="baselineValue" class="hidden group2">Please enter the baseline value for this indicator using numbers only: <input type="text" class="disabledInput  disabledGroup2" name="baselineValue" value=<?php echo"'$baselineValue'"?>/></p>
+			<p id="baselineValue" class="hidden group2">Please enter the baseline value for this indicator using numbers only: <input type="text" class="disabledInput  disabledGroup2" name="baselineValue" value=<?php echo"'$baseline'"?>/></p>
 
-			<p id="followupValue" class="hidden group2">Please enter the followup value for this indicator using numbers only: <input type="text" class="disabledInput  disabledGroup2" name="followupValue" value=<?php echo"'$followupValue'"?>/></p>
+			<p id="followupValue" class="hidden group2">Please enter the followup value for this indicator using numbers only: <input type="text" class="disabledInput  disabledGroup2" name="followupValue" value=<?php echo"'$followup'"?>/></p>
 <?php
 		}
 		if($graphType=='barGraph'||$graphType=='lineGraph')
@@ -239,9 +231,9 @@ else
 ?>
 	
 
-			<p id="XaxisTitle"class="hidden group3"> Please enter a brief title for the graph&#39;s X-axis<input type="text" class="disabledInput  disabledGroup3" name="xAxis" value=<?php echo"'$xAxisTitle'"?> /></p>
+			<p id="XaxisTitle"class="hidden group3"> Please enter a brief title for the graph&#apos;s X-axis<input type="text" class="disabledInput  disabledGroup3" name="xAxis" value=<?php echo"'$xAxisTitle'"?> /></p>
 	
-			<p id="YaxisTitle" class="hidden group3"> Please enter a brief title for the graph&#39;s Y-axis <input type="text" class="disabledInput  disabledGroup3" name="yAxis" value=<?php echo"'$yAxisTitle'"?> /></p>
+			<p id="YaxisTitle" class="hidden group3"> Please enter a brief title for the graph&#apos;s Y-axis <input type="text" class="disabledInput  disabledGroup3" name="yAxis" value=<?php echo"'$yAxisTitle'"?> /></p>
 
 
 <?php
@@ -266,11 +258,11 @@ else
 			</p>
 			<span style="display:none;"><?php echo $tableDataCount;?></span>
 
-			
+			<input type="submit" name="submit" value="Submit" />
 <?php
 		}	
 ?>
-			<input type="submit" name="submit" value="Submit" />
+	
 
 	</form>
 <?php

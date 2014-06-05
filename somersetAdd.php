@@ -90,7 +90,7 @@ $(function()
 				{
 
 					case 'barGraph':
-						$('.group').show();
+						$('.group2').show();
 						$('.disabledGroup2').removeProp('disabled');
 						$('.group3').show();
 						$('.disabledGroup3').removeProp('disabled');
