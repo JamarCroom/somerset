@@ -40,7 +40,7 @@
 	}
 	";
 
-include 'includes/head.inc';
+include 'include/head.inc';
 ?>
 
 		<form id="signin" action="login.php" method="POST">
@@ -64,9 +64,9 @@ include 'includes/head.inc';
 				try
 				{
 
-					$password1 = crypt($password,'%20This%20is%20the%20salt%20I%20use%20');
-					require_once 'includes/dbConnect.inc';
-					$sql = 'SELECT * FROM userTable WHERE userName =:userName AND password = :password AND isDisabled = "n"';
+					$password1 = crypt($password,'%20This%20is%20the%20salt');
+					require_once 'include/dbaseConnect.inc';
+					$sql = 'SELECT * FROM userTable WHERE userName =:userName AND password = :password';
 					$statement=$db->prepare($sql);
 					$statement->bindValue(':userName', $username);
 					$statement->bindValue(':password',$password1);
@@ -75,29 +75,15 @@ include 'includes/head.inc';
 					$statement->closeCursor();
 					if(empty($results) )
 					{
-						echo'<p class="error">Error:Username and password combination are invalid.</p>';
+						echo'<p class="error center">Error:Username and password combination are invalid.</p>';
 					}
 					else
 					{
-						foreach($results as $result)
-						{
-							$_SESSION['userId'] = $result['userId'];
-							if($result['isAdmin']=='y')
-								$_SESSION['isAdmin'] = $result['isAdmin'];
-						}	
+						$_SESSION['logged_in']= true;
 
-						$query = 'SELECT * FROM supervisorBridgeTable WHERE supervisorId = :supervisorId';
-						$statement = $db->prepare($query);
-						$statement->bindValue(':supervisorId',$_SESSION['userId']);
-						$statement->execute();
-						$supervisorResult=$statement->fetchAll();
-						if(!empty($supervisorResult))
-						{
-							$_SESSION['isSupervisor'] = 'y';
-						}
 					
 						session_regenerate_id();
-						header('Location:HVE.php');
+						header('Location:somersetAdd.php');
 					}
 
 				}
@@ -147,5 +133,5 @@ include 'includes/head.inc';
 
 		</form>
 <?php
-include 'includes/foot.inc';
+include 'include/foot.inc';
 ?>

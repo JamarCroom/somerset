@@ -15,7 +15,6 @@ else
 	$searchForm=true;
 	$toggleTable=false;
 	$modifyTable=false;
-	$_GET['action']="modify";
 	$action = $_GET['action'];
 
 	include 'include/head.inc';
@@ -114,6 +113,7 @@ else
 
 	if($searchForm)
 	{
+		echo"<h2>".ucfirst($action)." An Indicator</h2>";
 ?>	
 		<form action="search.php?action=<?php echo $action;?>" method="POST">
 		<p>Select a content area: <select id="contentAreas"  name="contentAreas" >
