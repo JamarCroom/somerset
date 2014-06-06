@@ -37,14 +37,14 @@ else
 					$targetNumber = $results['targetNumber'];
 					$measureUnit = $results['measureUnit'];
 					$changeType = $results['changeType'];
-					$baseline = $results['baselineValue'];
-					$followUp = $results['followupValue'];
+					$baselineValue = $results['baselineValue'];
+					$followupValue = $results['followupValue'];
 					$xAxisTitle = $results['xAxisTitle'];
 					$yAxisTitle = $results['yAxisTitle'];
 				}
 			}
 
-			if($graphType=='linegraph')
+			if($graphType=='lineGraph')
 			{
 				$query="SELECT * FROM indicatorMainTable JOIN indicatorTertiaryTable ON indicatorMainTable.indicatorId=indicatorTertiaryTable.indicatorId WHERE indicatorMainTable.indicatorId=:indicatorId";
 				$statement=$db->prepare($query);
@@ -119,6 +119,7 @@ else
 		$modifyPage=true;
 		require_once 'objects/Validation.php';
 		$validate = new Validation();
+		$indicatorId=$_POST['indicatorId'];
 		$contentArea=$validate->validateInput($_POST['contentArea'],'Content Area');
 		$indicatorType=$validate->validateInput($_POST['indicatorType'],'Indicator Type');
 		$graphType=$validate->validateInput($_POST['graphType'],'Visualize your data');
@@ -166,9 +167,11 @@ else
 
 				if($graphType=='barGraph')
 				{
+
 					$query="UPDATE indicatorMainTable SET contentArea =:contentArea, indicatorType=:indicatorType, graphType=:graphType, indicatorTitle=:indicatorTitle, measureUnit=:measureUnit, targetLanguage=:targetLanguage, targetNumber=:targetNumber WHERE indicatorId=:indicatorId";
 
 					$db->beginTransaction();
+					
 					$statement=$db->prepare($query);
 					$statement->bindValue(':indicatorId',$indicatorId);
 					$statement->bindValue(':contentArea',$contentArea);
@@ -189,15 +192,19 @@ else
 					$statement2->execute();			
 
 					$query3="UPDATE indicatorTertiaryTable SET xAxisTitle=:xAxisTitle, yAxisTitle=:yAxisTitle WHERE indicatorId=:indicatorId";
-					$statement3 = $db->prepare($query2);
+					$statement3 = $db->prepare($query3);
 					$statement3->bindValue(':indicatorId',$indicatorId);
 					$statement3->bindValue(':xAxisTitle',$xAxisTitle);
 					$statement3->bindValue(':yAxisTitle',$yAxisTitle);
 					$statement3->execute();	
+					
 					$db->commit();
+
+					$modifyPage=false;
+					echo'<p>You have successfully updated the indicator.</p>';
 				}
 
-				if($graphType=='linegraph')
+				if($graphType=='lineGraph')
 				{
 					$query="UPDATE indicatorMainTable SET contentArea =:contentArea, indicatorType=:indicatorType, graphType=:graphType, indicatorTitle=:indicatorTitle, measureUnit=:measureUnit, targetLanguage=:targetLanguage, targetNumber=:targetNumber WHERE indicatorId=:indicatorId";
 
@@ -228,9 +235,13 @@ else
 						$statement3 = $db->prepare($query2);
 						$statement3->bindValue(':year',$years[$key]);
 						$statement3->bindValue(':yearData',$yearData[$key]);
+						$statement3->bindValue(':indicatorId',$indicatorId);
 						$statement3->execute();
 					}
 					$db->commit();
+
+					$modifyPage=false;
+					echo'<p>You have successfully updated the indicator.</p>';
 
 				}
 
@@ -259,8 +270,11 @@ else
 					$statement2->bindValue(':followupValue',$followupValue);
 					$statement2->execute();	
 					$db->commit();
+
+					$modifyPage=false;
+					echo'<p>You have successfully updated the indicator.</p>';
 				}
-				$modifyPage=true;
+				
 			}
 			catch(PDOException $e)
 			{
@@ -277,7 +291,7 @@ else
 	if($modifyPage)
 	{
 ?>
-			<form action="somersetAddProcess.php" method="POST">
+			<form action="modify.php" method="POST">
 			<p>Select a content area: <select id="contentAreas"  name="contentArea" >
 				<option value=""<?php if($contentArea=='') echo 'selected'; ?>></option>
 			<option value="adultPAN" <?php if($contentArea=='adultPAN') echo 'selected'; ?> >Adult PAN</option>
@@ -295,7 +309,7 @@ else
 			<option value="programReach" <?php if($indicatorType=='programReach') echo 'selected'; ?>>Program Reach</option>
 			</select></p>
 
-			<p>How do you want to visualize your data? Choose an infographic: <select id="graphType">
+			<p>How do you want to visualize your data? Choose an infographic: <select id="graphType" name="graphType">
 				<option value=<?php echo"'$graphType'";?>><?php echo $graphType;?></option>
 			</select></p>
 
@@ -331,9 +345,9 @@ else
 ?>
 	
 
-			<p id="XaxisTitle"class="hidden group3"> Please enter a brief title for the graph&#apos;s X-axis<input type="text" class="disabledInput  disabledGroup3" name="xAxis" value=<?php echo"'$xAxisTitle'"?> /></p>
+			<p id="XaxisTitle"class="hidden group3"> Please enter a brief title for the graph&#39;s X-axis<input type="text" class="disabledInput  disabledGroup3" name="xAxis" value=<?php echo"'$xAxisTitle'"?> /></p>
 	
-			<p id="YaxisTitle" class="hidden group3"> Please enter a brief title for the graph&#apos;s Y-axis <input type="text" class="disabledInput  disabledGroup3" name="yAxis" value=<?php echo"'$yAxisTitle'"?> /></p>
+			<p id="YaxisTitle" class="hidden group3"> Please enter a brief title for the graph&#39;s Y-axis <input type="text" class="disabledInput  disabledGroup3" name="yAxis" value=<?php echo"'$yAxisTitle'"?> /></p>
 
 
 <?php

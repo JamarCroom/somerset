@@ -121,7 +121,7 @@ class Validation
 
 	public function validAlpha($input,$fieldname)
 	{
-		$pattern = "/^[A-Za-z'-\s]+$/";
+		$pattern = "/^[A-Za-z'\-\s]+$/";
 		$result= preg_match($pattern,$input);
 		if ($result ==0||!isset($input))
 		{

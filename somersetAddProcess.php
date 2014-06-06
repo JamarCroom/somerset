@@ -101,7 +101,7 @@ else
 
 			}
 
-			if($graphType=='linegraph')
+			if($graphType=='lineGraph')
 			{
 				$query="INSERT INTO indicatorMainTable(indicatorState, dateCreated,contentArea, indicatorType, graphType, indicatorTitle, measureUnit, targetLanguage, targetNumber) 
 				VALUES( :indicatorState, :dateCreated,:contentArea, :indicatorType, :graphType, :indicatorTitle, :measureUnit, :targetLanguage, :targetNumber)";
@@ -143,7 +143,7 @@ else
 			if($graphType=='speedometer'||$graphType=='arrowDown'||$graphType=='arrowUp')
 			{
 				$query="INSERT INTO indicatorMainTable(indicatorState, dateCreated,contentArea, indicatorType, graphType, indicatorTitle, measureUnit, targetLanguage, targetNumber) 
-				VALUES(:indicatorId, :indicatorState, :dateCreated,:contentArea, :indicatorType, :graphType, :indicatorTitle, :measureUnit, :targetLanguage, :targetNumber)";
+				VALUES(:indicatorState, :dateCreated,:contentArea, :indicatorType, :graphType, :indicatorTitle, :measureUnit, :targetLanguage, :targetNumber)";
 				
 				$statement=$db->prepare($query);
 				$statement->bindValue(':indicatorState','off');
