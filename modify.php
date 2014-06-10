@@ -1,13 +1,15 @@
 <?php
 session_start();
-$_SESSION['logged_in']=true;
+
 if(!isset($_SESSION['logged_in']))
 {
 	include 'include/privilegeError.inc';
 }
 else
 {
-
+	$modifiable=true;
+	include 'include/head.inc';
+	echo "<h2 class='center'>Modify An Indicator</h2>";
 	$modifyPage= false;
 	if(isset($_POST['searchSubmit']))
 	{
@@ -379,11 +381,11 @@ else
 		}
 ?>
 		<input type="hidden" name="indicatorId" value="<?php echo $indicatorId; ?>"/>
-		<input type="submit" name="submit" value="Submit" />
+		<p><input type="submit" name="submit" value="Submit" /></p>
 <?php
 	}
 
-
+	include 'include/foot.inc';
 }
 
 

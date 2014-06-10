@@ -6,141 +6,148 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-$(function()
+<?php
+if(!isset($modifiable))
 {
-		var yearNumber = 3;
+?>
+	$(function()
+	{
+			var yearNumber = 3;
 
-		$('.hidden').hide();
-		$('#addYear').on('click', function()
-		{
-			if(yearNumber>=5)
+			$('.hidden').hide();
+			$('#addYear').on('click', function()
 			{
-				alert('Note: You have entered the maximum number of data points allowed');
-
-			}
-			else
-			{
-				$('#lineGraphData tr:last').after("<tr><td>Enter a year:<input type='text' class='disabledInput disabledGroupUnique' name='year[]' /></td><td>Enter data for that year:<input type='text' class='disabledInput disabledGroupUnique' name='yearData[]'/></td></tr>");
-				yearNumber ++;
-			}
-			return false;
-		});
-
-		$('#removeYear').on('click',function()
-		{
-			if(yearNumber>3)
-			{
-				$('#lineGraphData tr:last').remove();
-				yearNumber --;
-			}
-			else
-			{
-				alert('Note: A minimum of 3 data points are required.');
-
-			}
-			return false;
-
-		});
-
-		$('#contentAreas').on('change',function()
-		{
-			var value = $('#graphType').val();
-			var content = $('#contentAreas').val();
-			var indicatorType = $('#indicatorTypes').val();
-			if(value !=''&&content!=''&&indicatorType!='')
-				$(':submit').removeProp('disabled');
-			
-			else
-				$(':submit').prop('disabled');	
-		});
-
-		$('#indicatorTypes').on('change',function()
-		{
-			var value = $('#graphType').val();
-			var content = $('#contentAreas').val();
-			var indicatorType = $('#indicatorTypes').val();
-			
-			if(value !=''&&content!=''&&indicatorType!='')
-				$(':submit').removeProp('disabled');
-			
-			else
-				$(':submit').prop('disabled');	
-		});
-
-		$('#graphType').on('change',function()
-		{
-			var value = $('#graphType').val();
-			var content = $('#contentAreas').val();
-			var indicatorType = $('#indicatorTypes').val();
-			
-			if(value !=''&&content!=''&&indicatorType!='')
-			{
-				$(':submit').removeProp('disabled');
-				$('.defaultGroup').show();
-				$('.defaultInput').removeProp('disabled');
-				
-				switch(value)
+				if(yearNumber>=5)
 				{
+					alert('Note: You have entered the maximum number of data points allowed');
 
-					case 'barGraph':
-						$('.group2').show();
-						$('.disabledGroup2').removeProp('disabled');
-						$('.group3').show();
-						$('.disabledGroup3').removeProp('disabled');
-
-						$('.uniqueLine').hide();
-						$('disabledGroupUnique').prop('disabled');
-					break;
-
-					case 'speedometer':
-						$('.group2').show();
-						$('.disabledGroup2').removeProp('disabled');
-						$('.group3').hide();
-						$('.disabledGroup3').prop('disabled');
-
-						$('.uniqueLine').hide();
-						$('disabledGroupUnique').prop('disabled');				
-					break;
-
-					case 'lineGraph':
-						$('.uniqueLine').show();
-						$('disabledGroupUnique').removeProp('disabled');
-						$('.group3').show();
-						$('.disabledGroup3').removeProp('disabled');
-
-						$('.group2').hide();
-						$('.disabledGroup2').prop('disabled');
-					break;
-
-					case 'arrowUp':
-						$('.group2').show();
-						$('.disabledGroup2').removeProp('disabled');
-						$('.group3').hide();
-
-						$('.disabledGroup3').prop('disabled');
-						$('.uniqueLine').hide();
-						$('disabledGroupUnique').prop('disabled');
-					break;
-
-					case 'arrowDown':
-						$('.group2').show();
-						$('.disabledGroup2').removeProp('disabled');
-						$('.group3').hide();
-
-						$('.disabledGroup3').prop('disabled');
-						$('.uniqueLine').hide();
-						$('disabledGroupUnique').prop('disabled');
-					break;
 				}
-			}
-			else
+				else
+				{
+					$('#lineGraphData tr:last').after("<tr><td>Enter a year:<input type='text' class='disabledInput disabledGroupUnique' name='year[]' /></td><td>Enter data for that year:<input type='text' class='disabledInput disabledGroupUnique' name='yearData[]'/></td></tr>");
+					yearNumber ++;
+				}
+				return false;
+			});
+
+			$('#removeYear').on('click',function()
 			{
-				$('.hidden').hide();
-				$('.disabledInput').prop('disabled');
-				$(':submit').prop('disabled');
-			}
-			
-		});
+				if(yearNumber>3)
+				{
+					$('#lineGraphData tr:last').remove();
+					yearNumber --;
+				}
+				else
+				{
+					alert('Note: A minimum of 3 data points are required.');
+
+				}
+				return false;
+
+			});
+
+			$('#contentAreas').on('change',function()
+			{
+				var value = $('#graphType').val();
+				var content = $('#contentAreas').val();
+				var indicatorType = $('#indicatorTypes').val();
+				if(value !=''&&content!=''&&indicatorType!='')
+					$(':submit').removeProp('disabled');
+				
+				else
+					$(':submit').prop('disabled');	
+			});
+
+			$('#indicatorTypes').on('change',function()
+			{
+				var value = $('#graphType').val();
+				var content = $('#contentAreas').val();
+				var indicatorType = $('#indicatorTypes').val();
+				
+				if(value !=''&&content!=''&&indicatorType!='')
+					$(':submit').removeProp('disabled');
+				
+				else
+					$(':submit').prop('disabled');	
+			});
+
+			$('#graphType').on('change',function()
+			{
+				var value = $('#graphType').val();
+				var content = $('#contentAreas').val();
+				var indicatorType = $('#indicatorTypes').val();
+				
+				if(value !=''&&content!=''&&indicatorType!='')
+				{
+					$(':submit').removeProp('disabled');
+					$('.defaultGroup').show();
+					$('.defaultInput').removeProp('disabled');
+					
+					switch(value)
+					{
+
+						case 'barGraph':
+							$('.group2').show();
+							$('.disabledGroup2').removeProp('disabled');
+							$('.group3').show();
+							$('.disabledGroup3').removeProp('disabled');
+
+							$('.uniqueLine').hide();
+							$('disabledGroupUnique').prop('disabled');
+						break;
+
+						case 'speedometer':
+							$('.group2').show();
+							$('.disabledGroup2').removeProp('disabled');
+							$('.group3').hide();
+							$('.disabledGroup3').prop('disabled');
+
+							$('.uniqueLine').hide();
+							$('disabledGroupUnique').prop('disabled');				
+						break;
+
+						case 'lineGraph':
+							$('.uniqueLine').show();
+							$('disabledGroupUnique').removeProp('disabled');
+							$('.group3').show();
+							$('.disabledGroup3').removeProp('disabled');
+
+							$('.group2').hide();
+							$('.disabledGroup2').prop('disabled');
+						break;
+
+						case 'arrowUp':
+							$('.group2').show();
+							$('.disabledGroup2').removeProp('disabled');
+							$('.group3').hide();
+
+							$('.disabledGroup3').prop('disabled');
+							$('.uniqueLine').hide();
+							$('disabledGroupUnique').prop('disabled');
+						break;
+
+						case 'arrowDown':
+							$('.group2').show();
+							$('.disabledGroup2').removeProp('disabled');
+							$('.group3').hide();
+
+							$('.disabledGroup3').prop('disabled');
+							$('.uniqueLine').hide();
+							$('disabledGroupUnique').prop('disabled');
+						break;
+					}
+				}
+				else
+				{
+					$('.hidden').hide();
+					$('.disabledInput').prop('disabled');
+					$(':submit').prop('disabled');
+				}
+				
+			});
+<?php
+}
+?>
 
 
 
