@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+</head>
+<body>
+	<form action="somersetAdd.php" method="POST">
+	<p>Select a content area: <select id="contentAreas" name="contentArea">
+	<option value="adultPAN">Adult PAN</option>
+	<option value="youthPAN"> Youth PAN</option>
+	<option value="adultSubstanceAbuse">Adult Substance Abuse</option>
+	<option value="youthSubstanceAbuse">Youth Substance Abuse</option>
+	<option value="coalition">Coalition</option>
+	</select></p>
+
+	<p>Select an indicator type: <select id="indicatorTypes" name="indicatorType">
+	<option value="goal">Program Goal</option>
+	<option value="outcome">Outcome</option>
+	<option value="environmentalSupports">Environmental Supports</option>
+	<option value="programReach">Program Reach</option>
+	</select></p>
+
+	<p>How do you want to visualize your data? Choose an infographic: <select id="graphType">
+		<option value=""></option>
+		<option value="barGraph">Bar graph</option>
+		<option value="speedometer">Speedometer</option>
+		<option value="lineGraph">Line Graph</option>
+		<option value="arrowUp">Directional Arrow (an increase is good)</option>
+		<option value="arrowDown">Directional Arrow (a decrease is good)</option>
+	</select></p>
+
+	<p id="indicatorTitle" class="hidden">What is the title of the indicator? <input type="text" name="indicatorTitle" /></p>
+
+	<p id="targetLanguage" class="hidden">Describe the target for this indicator? <input type="text" name="targetLanguage" /></p>
+
+
+	<p id="targetLanguage" class="hidden">Please enter the numerical value for the target: <input type="text" name="targetNumber" /></p>
+
+	<p id="changeType" class="hidden">Indicate the type of change that you would like exhibited: <select name="changeType"><option value="absoluteChange">Absolute Change(compare follow-up value to baseline value)</option><option value="percentChange">Percent Change(compare follow-up value as a percentage of baseline value)</option>
+	<option value="followUpToTarget">Follow-up vs. Target(compare follow-up to the target value)</option></select></p>
+	
+	<p id="XaxisTitle"> Please enter a brief title for the graph&#38;s X-axis<input type="text" name="xAxis" disbled/></p>
+	
+	<p id="YaxisTitle"> Please enter a brief title for the graph&#38;s Y-axis <input type="text" name="yAxis" disabled/></p>
+
+	<p id="linegraph">
+	<table id="lineGraphData">
+	<tr><td>Enter a year:</td><td></td><td>Enter data for that year:</td><td></td></tr>
+	<tr><td>Enter a year:</td><td></td><td>Enter data for that year:</td><td></td></tr>
+	<tr><td>Enter a year:</td><td></td><td>Enter data for that year:</td><td></td></tr>
+	<table>
+		<button id="addYear">Add a Year</button>
+	</p>
+	<p id="baselineValue">Please enter the baseline value for this indicator using numbers only: <input type="text" name="baselineValue" disabled/></p>
+
+	<p id="followupValue">Please enter the followup value for this indicator using numbers only: <input type="text" name="followupValue" disbled/></p>
+
+
+	<input type="submit" name="submit" value="submit" disabled />
+</form>
+</body>
+</html>

@@ -1,5 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Paytone+One' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="jquery.speedometer.js"></script>
+	<script src="jquery.jqcanvas-modified.js"></script>
+	<script src="excanvas-modified.js"></script>
+<script type="text/javascript">
+$(function()
+{
+	var outcomeCounter = parseInt($('#outcomeGraphCount').html());
+	//alert(outcomeCounter);
+	var outcomeIncrementer=1;
+
+	for(var i = 0; i < outcomeCounter; i++)
+	{
+
+		var graphType = "outcomeGraphType"+outcomeIncrementer;
+		graphType = document.getElementById(graphType);
+			
+		var graphTypeValue = $(graphType).html();
+		
+		if(graphTypeValue=='barGraph')
+		{
 
 
+			alert('hello');
+		}
+
+		outcomeIncrementer++;
+		
+	}
+
+});	
+</script>
+
+<style type="text/css">
+
+</style>
+</head>
+<body>
 <?php
 require_once 'include/dbaseConnect.inc';
 $_GET['contentArea']='adultPAN';
@@ -50,8 +93,8 @@ $outcomeCount = count($result2);
 foreach($result2 as $results2)
 {
 	echo"<div class='infoTable'>
-	<p>Graph Type:<span class='outcomeGraphType'>".$results2['graphType']."</span></p>
-	<p>Outcome Graph Count:<span class='outcomeGraphCount'>".$counts."</span></p>
+	<p>Graph Type:<span id='outcomeGraphType".$counts."'>".$results2['graphType']."</span></p>
+	
 	";
 	
 	if($results2['graphType']=='speedometer'||$results2['graphType']=='barGraph'||$results2['graphType']=='arrowDown'||$results2['graphType']=='arrowUp')
@@ -66,8 +109,8 @@ foreach($result2 as $results2)
 			$statements->closeCursor();
 			foreach($newResults as $newResult)
 			{
-				echo"<p>Baseline Value<span class='baselineValue".$counts."'>".$newResult['baselineValue']."</span></p>";
-				echo"<p>Followup Value<span class='followupValue".$counts."'>".$newResult['followupValue']."</span></p>";
+				echo"<p>Baseline Value <span id='baselineValue".$counts."'>".$newResult['baselineValue']."</span></p>";
+				echo"<p>Followup Value <span id='followupValue".$counts."'>".$newResult['followupValue']."</span></p>";
 				if($newResult['changeType']=='absoluteChange')
 				{
 					$change=round($newResult['followupValue']-$newResult['baselineValue']);
@@ -101,7 +144,7 @@ foreach($result2 as $results2)
 						$changeLanguage=$change."% of target achieved";
 
 				}
-				echo"<p>Change Type<span class='changeType".$counts."'>".$changeLanguage."</span></p>";
+				echo"<p>Change Type <span class='changeType".$counts."'>".$changeLanguage."</span></p>";
 
 
 			}	
@@ -109,13 +152,17 @@ foreach($result2 as $results2)
 		catch(PDOException $e)
 		{
 
-			exit();
+		?>
+			<p class="error center">There was an error connecting to the database. Please contact the system administrator.<br/> Error code:<?php echo $e->getCode() ;?> Error Message:
+						<?php echo $e->getMessage();?></p>
+		<?php
 		}
 		if($results2['graphType']=='barGraph'||$results2['graphType']=='lineGraph')
 		{
+			
 				try
 				{
-					$barQuery="SELECT * FROM indicatorTeritaryTable WHERE indicatorId=:indicatorId";
+					$barQuery="SELECT * FROM indicatorTertiaryTable WHERE indicatorId=:indicatorId";
 					$statement = $db->prepare($barQuery);
 					$statement->bindValue(':indicatorId',$results2['indicatorId']);
 					$statement->execute();
@@ -125,11 +172,16 @@ foreach($result2 as $results2)
 				}
 				catch(PDOException $e)
 				{
-					exit();
+
+				?>
+					  <p class="error center">There was an error connecting to the database. Please contact the system administrator.<br/> Error code:<?php echo $e->getCode() ;?> Error Message:
+						<?php echo $e->getMessage();?></p>
+				<?php
 				}
 
 				foreach($barResult as $barResults)
 				{
+					
 					echo"<p>X Axis<span class='xAxisTitle".$counts."'>".$barResults['xAxisTitle']."</span></p>";
 					echo"<p>Y Axis<span class='yAxisTitle".$counts."'>".$barResults['yAxisTitle']."</span></p>";
 				}
@@ -149,7 +201,10 @@ foreach($result2 as $results2)
 				}
 				catch(PDOException $e)
 				{
-					exit();
+				?>
+					 <p class="error center">There was an error connecting to the database. Please contact the system administrator.<br/> Error code:<?php echo $e->getCode() ;?> Error Message:
+						<?php echo $e->getMessage();?></p>
+				<?php
 				}
 				$loopCount=1;
 				foreach($yearResult as $yearResults)
@@ -167,7 +222,7 @@ foreach($result2 as $results2)
 
 
 	//display
-		echo"<h3 class='outcomeClass center'>".$results2['indicatorTitle']."</h2>";
+		echo"<h3 class='outcomeClass center'>".$results2['indicatorTitle']."</h3>";
 	echo"<p class='outcomeClass'><strong>Target:</strong>".$results2['targetLanguage']."</p>";
 	if($results2['graphType']=='barGraph'||$results2['graphType']=='lineGraph')
 		echo"<div id='outcomeGraphic".$counts."' class='outcomeGraphic outcomeClass' style='width: 540px; height 300px; margin:20px auto;'></div>";
@@ -187,26 +242,18 @@ foreach($result2 as $results2)
 
 
 	if($results2['graphType']=='speedometer'||$results2['graphType']=='barGraph'||$results2['graphType']=='arrowDown'||$results2['graphType']=='arrowUp')
-		//echo"<p class='outcomeClass bottom'><strong>Current Progress:</strong>".$changeLanguage."</p>";
-	$counts++;
+		echo"<p class='outcomeClass bottom'><strong>Current Progress:</strong>".$changeLanguage."</p>";
+	
+
+	
 	if ($outcomeCount==$counts)
-		echo"<hr class='outcomeClass bigbottom'/>";		
+	{
+		echo"<p class='infoTable'>Outcome Graph Count: <span id='outcomeGraphCount'>".$outcomeCount."</span></p>";
+		echo"<hr class='outcomeClass bigbottom'/>";	
 
+	}	
+	$counts++;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
+</body>
+</html>
