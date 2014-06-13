@@ -62,12 +62,10 @@ $(function()
 
 		if($(document.getElementById("outcomeGraphType" + outcomeIncrementer)).html() == 'lineGraph')
 		{
-			alert(parseInt($(document.getElementById("year" + outcomeIncrementer + "Data1")).html()));
-			alert(parseInt($(document.getElementById("yearCount" + outcomeIncrementer)).html()) );
+
 			if(parseInt($(document.getElementById("yearCount" + outcomeIncrementer)).html()) == 3)
 			{
-
-								$(document.getElementById("outcomeGraphic" + outcomeIncrementer)).highcharts
+					$(document.getElementById("outcomeGraphic" + outcomeIncrementer)).highcharts
 					({
 		            title: {
 		                text: ''
@@ -256,12 +254,16 @@ foreach($result2 as $results2)
 					$change=round($newResult['followupValue']-$newResult['baselineValue']);
 					if($change<0)
 					{
-						$change=abs($change);
-						$changeLanguage="A decrease in ".$change." ".$results2['measureUnit']." compared to baseline.";
+						$nchange=abs($change);
+						$changeLanguage="A decrease in ".$nchange." ".$results2['measureUnit']." compared to baseline.";
+					}
+					else if($change>0)
+					{
+						$changeLanguage="An increase in ".$change." ".$results2['measureUnit']." compared to baseline.";	
 					}
 					else
 					{
-						$changeLanguage="An increase in ".$change." ".$results2['measureUnit']." compared to baseline.";	
+						$changeLanguage ="No change compared to baseline.";
 					}
 				}
 				if($newResult['changeType']=='percent')
@@ -269,12 +271,16 @@ foreach($result2 as $results2)
 					$change=round(((($newResult['followupValue']-$newResult['baselineValue'])/$newResult['baseline'])*100));
 					if($change<0)
 					{
-						$change=abs($change);
-						$changeLanguage="A ".$change." percent decrease achieved";
+						$nchange=abs($change);
+						$changeLanguage="A ".$nchange." percent decrease achieved";
+					}
+					else if ($change>0)
+					{
+						$changeLanguage="A ".$change." percent increase achieved";	
 					}
 					else
 					{
-						$changeLanguage="A ".$change." percent increase achieved";	
+						$changeLanguage="No change achieved.";
 					}
 				}
 				if($newResult['changeType']=='followUpToTarget')
@@ -298,6 +304,39 @@ foreach($result2 as $results2)
 						<?php echo $e->getMessage();?></p>
 		<?php
 		}
+
+		if($results2['graphType']=='arrowUp')
+		{
+			if($change>0)
+			{
+				$imagePath ="image/greenArrowUp.png";
+			}
+			else if($change<0)
+			{
+				$imagePath ="image/redArrowDown.png";	
+			}
+			else
+			{
+				$imagePath ="image/gold_equal_sign.png";
+			}
+		}
+
+		if($results2['graphType']=='arrowDown')
+		{
+			if($change>0)
+			{
+				$imagePath ="image/redArrowUp.png";
+			}
+			else if($change<0)
+			{
+				$imagePath ="image/greenArrowDown.png";	
+			}
+			else
+			{
+				$imagePath ="image/gold_equal_sign.png";
+			}	
+		}
+
 	}
 		if($results2['graphType']=='barGraph' || $results2['graphType']=='lineGraph')
 		{
@@ -374,10 +413,10 @@ foreach($result2 as $results2)
 		echo"<div id='outcomeGraphic".$counts."'' class='outcomeGraphic outcomeClass' style='margin: 0 auto;''></div>";
 
 	if($results2['graphType']=='arrowUp')
-		echo"<div  id='outcomeGraphic".$counts."' class='outcomeGraphic outcome' style ='text-align:center; width: 540px; height: 250px; margin: 0 auto;'><img src='green_arrow.png' width='200px' height='200px'/></div>";
+		echo"<div  id='outcomeGraphic".$counts."' class='outcomeGraphic outcome' style ='text-align:center; width: 540px; height: 250px; margin: 0 auto;'><img src='".$imagePath."' width='200px' height='200px'/></div>";
 
 	if($results2['graphType']=='arrowDown')
-		echo"<div id='outcomeGraphic".$counts."' class='outcomeGraphic outcome' style ='text-align:center; width: 540px; height: 250px; margin: 0 auto;'><img src='green_arrow.png' width='200px' height='200px'/></div>";
+		echo"<div id='outcomeGraphic".$counts."' class='outcomeGraphic outcome' style ='text-align:center; width: 540px; height: 250px; margin: 0 auto;'><img src='".$imagePath."' width='200px' height='200px'/></div>";
 
 
 
