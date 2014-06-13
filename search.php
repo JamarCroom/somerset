@@ -1,6 +1,6 @@
 <?php
 session_start();
-/*
+
 if(!isset($_SESSION['logged_in']))
 {
 
@@ -11,11 +11,37 @@ if(!isset($_SESSION['logged_in']))
 
 else
 {
-*/
+
 	$searchForm=true;
 	$toggleTable=false;
 	$modifyTable=false;
 	$action = $_GET['action'];
+
+	$style="
+		table
+		{
+			width: 70%;
+			margin: 60px auto;
+		}
+	
+		thead
+		{
+			color: white;
+			background-color: black;
+		}
+		th
+		{
+			margin: 0;
+			padding: 0;
+		}
+
+		td
+		{
+			text-align: center;
+		}
+
+
+	";
 
 	include 'include/head.inc';
 	if(isset($_POST['submit']))
@@ -137,7 +163,7 @@ else
 <?php
 	}
 	include 'include/foot.inc';
-/*	
+	
 }
-*/
+
 ?>

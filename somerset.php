@@ -63,6 +63,7 @@ $(function()
 		if($(document.getElementById("outcomeGraphType" + outcomeIncrementer)).html() == 'lineGraph')
 		{
 			alert(parseInt($(document.getElementById("year" + outcomeIncrementer + "Data1")).html()));
+			alert(parseInt($(document.getElementById("yearCount" + outcomeIncrementer)).html()) );
 			if(parseInt($(document.getElementById("yearCount" + outcomeIncrementer)).html()) == 3)
 			{
 
@@ -89,12 +90,12 @@ $(function()
 
 		            series: [{
 		               
-		                data: [parseInt($(document.getElementById("year" + outcomeIncrementer + "Data1")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Results2")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Results3")).html())]
+		                data: [parseInt($(document.getElementById("year" + outcomeIncrementer + "Data1")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Data2")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Data3")).html())]
 		            	}]
         		});
 
 			}
-/*
+
 			if(parseInt($(document.getElementById("yearCount" + outcomeIncrementer)).html()) == 4)
 			{
 				$(document.getElementById("outcomeGraphic" + outcomeIncrementer)).highcharts
@@ -108,7 +109,7 @@ $(function()
 		               
 		            },
 		            xAxis: {
-		                categories: [$(document.getElementById("year" + outcomeIncrementer + "Results1")).html(), $(document.getElementById("year" + outcomeIncrementer + "Results2")).html(), $(document.getElementById("year" + outcomeIncrementer + "Results3")).html(), 
+		                categories: [$(document.getElementById("year" + outcomeIncrementer + "Results1")).html(), $(document.getElementById("year" + outcomeIncrementer + "Data2")).html(), $(document.getElementById("year" + outcomeIncrementer + "Data3")).html(), 
 		                $(document.getElementById("year" + outcomeIncrementer + "Results4")).html()]
 		            },
 		            yAxis: {
@@ -120,8 +121,8 @@ $(function()
 
 		            series: [{
 		               
-		                data: [parseInt($(document.getElementById("year" + outcomeIncrementer + "Data1")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Results2")).html()), parseInt$(document.getElementById("year" + outcomeIncrementer + "Results3")).html()), 
-							parseInt($(document.getElementById("year" + outcomeIncrementer + "Results4")).html())]
+		                data: [parseInt($(document.getElementById("year" + outcomeIncrementer + "Data1")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Data2")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Data3")).html()), 
+							parseInt($(document.getElementById("year" + outcomeIncrementer + "Data4")).html())]
 		            	}]
         		});
 
@@ -151,12 +152,12 @@ $(function()
 
 		            series: [{
 		               
-		                data: [parseInt($(document.getElementById("year" + outcomeIncrementer + "Data1")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Results2")).html()), parseInt$(document.getElementById("year" + outcomeIncrementer + "Results3")).html()), 
-							parseInt($(document.getElementById("year" + outcomeIncrementer + "Results4")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Results5")).html())]
+		                data: [parseInt($(document.getElementById("year" + outcomeIncrementer + "Data1")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Data2")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Data3")).html()), 
+							parseInt($(document.getElementById("year" + outcomeIncrementer + "Data4")).html()), parseInt($(document.getElementById("year" + outcomeIncrementer + "Data5")).html())]
 		            	}]
         		});
 			}
-*/
+
 
 		}
 
@@ -297,7 +298,8 @@ foreach($result2 as $results2)
 						<?php echo $e->getMessage();?></p>
 		<?php
 		}
-		if($results2['graphType']=='barGraph'||$results2['graphType']=='lineGraph')
+	}
+		if($results2['graphType']=='barGraph' || $results2['graphType']=='lineGraph')
 		{
 			
 				try
@@ -329,7 +331,7 @@ foreach($result2 as $results2)
 		
 		if($results2['graphType'] =='lineGraph')
 		{
-			echo"helloYear";
+			
 				try
 				{
 					$barQuery="SELECT * FROM yearsTable WHERE indicatorId=:indicatorId";
@@ -347,18 +349,18 @@ foreach($result2 as $results2)
 						<?php echo $e->getMessage();?></p>
 				<?php
 				}
-				$loopCount=1;
+				$loopCount=0;
 				foreach($yearResult as $yearResults)
 				{
-
-					echo "<p>Year<span id='year".$counts."Results".$loopCount."'>".$yearResults['year']."</span> Data Year<span id='year".$counts."Data".$loopCount."'>".$yearResults['yearData']."</span></p>";
 					$loopCount++;
+					echo "<p>Year<span id='year".$counts."Results".$loopCount."'>".$yearResults['year']."</span> Data Year<span id='year".$counts."Data".$loopCount."'>".$yearResults['yearData']."</span></p>";
+					
 				}
 				echo"<p>Year count<span id='yearCount".$counts."'>".$loopCount."</span></p>";
 
 		}
 
-	}
+	
 	echo"</div>";
 
 
