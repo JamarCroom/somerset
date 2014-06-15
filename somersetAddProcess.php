@@ -199,6 +199,7 @@ else
 			<option value="" <?php if($indicatorType=='') echo 'selected'; ?>></option>
 			<option value="goal" <?php if($indicatorType=='goal') echo 'selected'; ?>>Program Goal</option>
 			<option value="outcome" <?php if($indicatorType=='outcome') echo 'selected'; ?>>Outcome</option>
+			<option value="policy" <?php if($indicatorType=='policy') echo 'selected'; ?>>Policy</option>
 			<option value="environmentalSupports" <?php if($indicatorType=='environmentalSupports') echo 'selected'; ?>>Environmental Supports</option>
 			<option value="programReach" <?php if($indicatorType=='programReach') echo 'selected'; ?>>Program Reach</option>
 			</select></p>

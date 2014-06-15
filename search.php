@@ -155,6 +155,7 @@ else
 		<option value=""></option>
 		<option value="goal">Program Goal</option>
 		<option value="outcome">Outcome</option>
+		<option value="policy">Policy</option>
 		<option value="environmentalSupports">Environmental Supports</option>
 		<option value="programReach">Program Reach</option>
 		</select></p>
