@@ -210,7 +210,7 @@ var policyCounter = parseInt($('#policyGraphCount').html());
 
 		if($(document.getElementById("policyGraphType" + policyIncrementer)).html() == 'speedometer')
 		{
-				$(document.getElementById("policyGraphic" + policyIncrementer)).speedometer({percentage: parseInt($(document.getElementById("changeNumber"+outcomeIncrementer)).html())});
+				$(document.getElementById("policyGraphic" + policyIncrementer)).speedometer({percentage: parseInt($(document.getElementById("policyChangeNumber"+ policyIncrementer)).html())});
 				
 		}
 
@@ -368,7 +368,7 @@ var reachCounter = parseInt($('#reachGraphCount').html());
 
 		if($(document.getElementById("reachGraphType" + reachIncrementer)).html() == 'speedometer')
 		{
-				$(document.getElementById("reachGraphic" + reachIncrementer)).speedometer({percentage: parseInt($(document.getElementById("changeNumber"+outcomeIncrementer)).html())});
+				$(document.getElementById("reachGraphic" + reachIncrementer)).speedometer({percentage: parseInt($(document.getElementById("reachChangeNumber"+reachIncrementer)).html())});
 				
 		}
 
@@ -525,7 +525,7 @@ var environmentalCounter = parseInt($('#environmentalGraphCount').html());
 
 		if($(document.getElementById("environmentalGraphType" + environmentalIncrementer)).html() == 'speedometer')
 		{
-				$(document.getElementById("environmentalGraphic" + environmentalIncrementer)).speedometer({percentage: parseInt($(document.getElementById("changeNumber"+outcomeIncrementer)).html())});
+				$(document.getElementById("environmentalGraphic" + environmentalIncrementer)).speedometer({percentage: parseInt($(document.getElementById("environmentalChangeNumber"+ environmentalIncrementer)).html())});
 				
 		}
 
@@ -681,7 +681,7 @@ var goalCounter = parseInt($('#goalGraphCount').html());
 
 		if($(document.getElementById("goalGraphType" + goalIncrementer)).html() == 'speedometer')
 		{
-				$(document.getElementById("goalGraphic" + goalIncrementer)).speedometer({percentage: parseInt($(document.getElementById("changeNumber"+outcomeIncrementer)).html())});
+				$(document.getElementById("goalGraphic" + goalIncrementer)).speedometer({percentage: parseInt($(document.getElementById("goalChangeNumber"+goalIncrementer)).html())});
 				
 		}
 
@@ -1245,7 +1245,7 @@ hr
 <div id="wrapper">
 
 <div id="header"><img src="image/sommerset_logo.png" id="logo" style="vertical-align: middle; border-radius: 5px;"/><span id="logoWording">Somerset Public Health Web Dashboard</span></div>
-	<nav><ul><li><a href="somerset.php?contentArea">Youth PAN</a></li><li><a href="somerset.php?contentArea=adultPAN">Adult PAN</a></li>
+	<nav><ul><li><a href="somerset.php?contentArea=youthPAN">Youth PAN</a></li><li><a href="somerset.php?contentArea=adultPAN">Adult PAN</a></li>
 	<li><a href="somerset.php?contentArea=adultSubstanceAbuse">Adult Substance Abuse</a></li>
 	<li><a href="somerset.php?contentArea=youthSubstanceAbuse">Youth Substance Abuse</a></li>
 
