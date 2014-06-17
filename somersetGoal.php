@@ -24,8 +24,8 @@ foreach($result1 as $results1)
 			$statements->closeCursor();
 			foreach($newResults as $newResult)
 			{
-				echo"<p>Baseline Value <span id='baselineValue".$goalClassCounts."'>".$newResult['baselineValue']."</span></p>";
-				echo"<p>Followup Value <span id='followupValue".$goalClassCounts."'>".$newResult['followupValue']."</span></p>";
+				echo"<p>Baseline Value <span id='goalBaselineValue".$goalClassCounts."'>".$newResult['baselineValue']."</span></p>";
+				echo"<p>Followup Value <span id='goalFollowupValue".$goalClassCounts."'>".$newResult['followupValue']."</span></p>";
 				if($newResult['changeType']=='absoluteChange')
 				{
 					$change=round($newResult['followupValue']-$newResult['baselineValue']);
@@ -183,11 +183,14 @@ foreach($result1 as $results1)
 	//display
 		echo"<h3 class='goalClass center'>".$results1['indicatorTitle']."</h3>";
 	echo"<p class='goalClass'><strong>Target:</strong>".$results1['targetLanguage']."</p>";
-	if($results1['graphType']=='barGraph'||$results1['graphType']=='lineGraph')
+	if($results1['graphType']=='barGraph')
 		echo"<div id='goalClassGraphic".$goalClassCounts."' class='goalClassGraphic goalClass' style='width: 540px; height 300px; margin:20px auto;'></div>";
 
+	if($results1['graphType']=='lineGraph')
+		echo"<div id='goalClassGraphic".$goalClassCounts."' class='goalClassGraphic goalClass bottom' style='width: 540px; height 300px; margin:20px auto;'></div>";
+
 	if($results1['graphType']=='speedometer')
-		echo"<div id='goalClassGraphic".$goalClassCounts."'' class='goalClassGraphic goalClass' style='margin: 0 auto;''></div>";
+		echo"<div id='goalClassGraphic".$goalClassCounts."' class='goalClassGraphic goalClass' style='margin: 0 auto;'></div>";
 
 	if($results1['graphType']=='arrowUp')
 		echo"<div  id='goalClassGraphic".$goalClassCounts."' class='goalClassGraphic goalClass' style ='text-align:center; width: 540px; height: 250px; margin: 0 auto;'><img src='".$imagePath."' width='200px' height='200px'/></div>";

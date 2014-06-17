@@ -1,4 +1,4 @@
-<h2 class="center policy indicatorTitle">Policy Success Indicators</h2>
+<h2 id="policyspot" class="center policy indicatorTitle">Policy Success Indicators</h2>
 <?php
 
 
@@ -7,7 +7,7 @@ $policyCounts=1;
 $totalPolicyCount = count($result5);
 foreach($result5 as $results5)
 {
-	echo"hello";
+	
 	echo"<div class='infoTable'>
 	<p>Graph Type:<span id='policyGraphType".$policyCounts."'>".$results5['graphType']."</span></p>
 	
@@ -184,11 +184,14 @@ foreach($result5 as $results5)
 	//display
 		echo"<h3 class='policy center'>".$results5['indicatorTitle']."</h3>";
 	echo"<p class='policy'><strong>Target:</strong>".$results5['targetLanguage']."</p>";
-	if($results5['graphType']=='barGraph'||$results5['graphType']=='lineGraph')
+	if($results5['graphType']=='barGraph')
 		echo"<div id='policyGraphic".$policyCounts."' class='policyGraphic policy' style='width: 540px; height 300px; margin:20px auto;'></div>";
 
+	if($results5['graphType']=='lineGraph')
+		echo"<div id='policyGraphic".$policyCounts."' class='policyGraphic policy bottom' style='width: 540px; height 300px; margin:20px auto;'></div>";
+
 	if($results5['graphType']=='speedometer')
-		echo"<div id='policyGraphic".$policyCounts."'' class='policyGraphic policy' style='margin: 0 auto;''></div>";
+		echo"<div id='policyGraphic".$policyCounts."' class='policyGraphic policy' style='margin: 0 auto;'></div>";
 
 	if($results5['graphType']=='arrowUp')
 		echo"<div  id='policyGraphic".$policyCounts."' class='policyGraphic policy' style ='text-align:center; width: 540px; height: 250px; margin: 0 auto;'><img src='".$imagePath."' width='200px' height='200px'/></div>";

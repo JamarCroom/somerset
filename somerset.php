@@ -24,8 +24,6 @@ $(function()
 		if($(document.getElementById("outcomeGraphType" + outcomeIncrementer)).html() == 'barGraph')
 		{
 
-
-
 			$(document.getElementById("outcomeGraphic" + outcomeIncrementer)).highcharts
 			({
 		        chart: {
@@ -637,21 +635,19 @@ var environmentalCounter = parseInt($('#environmentalGraphCount').html());
 //goal
 
 
-var goalCounter = parseInt($('#goalGraphCount').html());
+var goalCounter = parseInt($('#goalClassGraphCount').html());
 
 	var goalIncrementer=1;
-
 
 	for(var i = 0; i < goalCounter; i++)
 	{
 
-		
-		if($(document.getElementById("goalGraphType" + goalIncrementer)).html() == 'barGraph')
+		if($(document.getElementById("goalClassGraphType" + goalIncrementer)).html() == 'barGraph')
 		{
+				
 
 
-
-			$(document.getElementById("goalGraphic" + goalIncrementer)).highcharts
+			$(document.getElementById("goalClassGraphic" + goalIncrementer)).highcharts
 			({
 		        chart: {
 		            type: 'column'
@@ -679,18 +675,18 @@ var goalCounter = parseInt($('#goalGraphCount').html());
 
 		}
 
-		if($(document.getElementById("goalGraphType" + goalIncrementer)).html() == 'speedometer')
+		if($(document.getElementById("goalClassGraphType" + goalIncrementer)).html() == 'speedometer')
 		{
-				$(document.getElementById("goalGraphic" + goalIncrementer)).speedometer({percentage: parseInt($(document.getElementById("goalChangeNumber"+goalIncrementer)).html())});
+				$(document.getElementById("goalClassGraphic" + goalIncrementer)).speedometer({percentage: parseInt($(document.getElementById("goalChangeNumber"+goalIncrementer)).html())});
 				
 		}
 
-		if($(document.getElementById("goalGraphType" + goalIncrementer)).html() == 'lineGraph')
+		if($(document.getElementById("goalClassGraphType" + goalIncrementer)).html() == 'lineGraph')
 		{
 
 			if(parseInt($(document.getElementById("goalYearCount" + goalIncrementer)).html()) == 3)
 			{
-					$(document.getElementById("outcomeGraphic" + goalIncrementer)).highcharts
+					$(document.getElementById("goalClassGraphic" + goalIncrementer)).highcharts
 					({
 		            title: {
 		                text: ''
@@ -721,7 +717,7 @@ var goalCounter = parseInt($('#goalGraphCount').html());
 
 			if(parseInt($(document.getElementById("goalYearCount" + goalIncrementer)).html()) == 4)
 			{
-				$(document.getElementById("goalGraphic" + goalIncrementer)).highcharts
+				$(document.getElementById("goalClassGraphic" + goalIncrementer)).highcharts
 				({
 		            title: {
 		                text: ''
@@ -752,7 +748,7 @@ var goalCounter = parseInt($('#goalGraphCount').html());
 			}
 			if(parseInt($(document.getElementById("goalYearCount" + goalIncrementer)).html()) == 5)
 			{
-				$(document.getElementById("goalGraphic" + goalIncrementer)).highcharts
+				$(document.getElementById("goalClassGraphic" + goalIncrementer)).highcharts
 				({
 		            title: {
 		                text: ''
@@ -1037,16 +1033,21 @@ body
 
 @font-face
 {
-font-family: chunkfive;
-src: url('font/Chunkfive.otf');
- 
+	font-family: chunkfive;
+	src: url('font/Chunkfive.otf');
 } 
 
 #header
 {
 	margin: 10px 0;
 	background-color: #000066;
-	border-radius:5px;	
+	border-radius:5px;
+position:fixed;
+}
+
+#nav_bar
+{
+
 }
 
 #logoWording
@@ -1066,13 +1067,44 @@ aside
 	border-radius: 5px;
 	color: white;
 	height: 600px;
-	position: fixed;
+	/*position: fixed;*/
 }
 p
 {
 	margin: 0 15px; 
 }
+.spots
+{
+	color: #104583;
+}
 
+.spots:visited
+{
+
+	color: #104583;
+}
+
+.spots:hover
+{
+	color:white;
+}
+
+#outcome:hover
+{
+	color:white;
+}
+#policySuccess:hover
+{
+	color:white;
+}
+#environmentalSupports:hover
+{
+	color:white;
+}
+#programReach:hover
+{
+	color:white;
+}
 
 
 #title
@@ -1107,27 +1139,6 @@ ul li ul li ul li
 	padding-bottom: 5px;
 }
 
-#goal:hover
-{
-
-	color:white;
-}
-#outcome:hover
-{
-	color:white;
-}
-#policySuccess:hover
-{
-	color:white;
-}
-#environmentalSupports:hover
-{
-	color:white;
-}
-#programReach:hover
-{
-	color:white;
-}
 
 
 #listVars
@@ -1146,6 +1157,7 @@ body
 	width: auto;
 
 }*/
+
 #mainSelection
 {
 	margin-top: 20px;
@@ -1181,7 +1193,15 @@ hr
 	margin-bottom: 20px;
 }
 
+.spots
+{
+	text-decoration: none;
+}
 
+.spots
+{
+
+}
  nav
  {
  	width: 950px;
@@ -1220,8 +1240,10 @@ hr
  }
   nav ul li a:hover
  {
- 	color: #cedce7;
+ 	color: white;
  }
+
+
  nav ul
  {
  	
@@ -1245,7 +1267,7 @@ hr
 <div id="wrapper">
 
 <div id="header"><img src="image/sommerset_logo.png" id="logo" style="vertical-align: middle; border-radius: 5px;"/><span id="logoWording">Somerset Public Health Web Dashboard</span></div>
-	<nav><ul><li><a href="somerset.php?contentArea=youthPAN">Youth PAN</a></li><li><a href="somerset.php?contentArea=adultPAN">Adult PAN</a></li>
+	<nav id="nav_bar"><ul><li><a href="somerset.php?contentArea=youthPAN">Youth PAN</a></li><li><a href="somerset.php?contentArea=adultPAN">Adult PAN</a></li>
 	<li><a href="somerset.php?contentArea=adultSubstanceAbuse">Adult Substance Abuse</a></li>
 	<li><a href="somerset.php?contentArea=youthSubstanceAbuse">Youth Substance Abuse</a></li>
 
@@ -1254,10 +1276,10 @@ hr
 <ul id = "mainSelection">
 	<li> <span id="goal"><img id="goalImage"src="image/plus.gif"/>Program Goal</span>
 	<ul id="listVars">
-				<li id="outcome">Outcome</li>
-				<li id="policySuccess">Policy Success</li>
-				<li id="environmentalSupports">Environmental Supports</li>
-				<li id="programReach">Program Reach</li>		
+				<li id="outcome"><a href="#outcomespot" class="spots">Outcome</a></li>
+				<li id="policySuccess"><a href="#policyspot" class="spots">Policy Success</a></li>
+				<li id="environmentalSupports"><a href="#environmentalspot" class="spots">Environmental Supports</a></li>
+				<li id="programReach"><a href="#reachspot" class="spots">Program Reach</a></li>		
 	</ul>
 	</li>
 </ul>
@@ -1298,6 +1320,10 @@ hr
 	<h2 id="PANHeadline" class="center Paytone"><?php echo "$content Indicators"; ?></h2>
 </div>
 <section>
+	<div class="instructions" style="height:500px">	
+<h3 class="center" style="font-size:1.4em">Instructions</h3>
+<p style="font-size:1em">Click on the expandable menu in the left pane to view GSPHC data dashboards.</p>
+</div>
 <?php
 require_once 'include/dbaseConnect.inc';
 
@@ -1344,19 +1370,77 @@ catch(PDOException $e)
 	<?php echo $e->getMessage();?></p>
 <?php
 }
-	if(!empty($result1))
-		include 'somersetGoal.php';
-	if(!empty($result2))
-		include 'somersetOutcome.php';
+	if(empty($result1)&& empty($result2)&&empty($result3)&&empty($result4)&&empty($result5))
+	{
+?>
+		<div  style="height:500px">	
+<h3 class="center" style="font-size:1.4em">Results Unavailble</h3>
+	<p style="font-size:1em" class="center">There are no indicators available to display for this section.</p>
+</div>
+<?php
+	}
+	else
+	{
+		if(!empty($result1))
+			include 'somersetGoal.php';
+		else
+		{
+?>
+			<div  style="height:500px">	
+		<h3 class="center" style="font-size:1.4em">Results Unavailable</h3>
+		<p style="font-size:1em" class="center">There are no program goal data available to display for this section.</p>
+		</div>
+<?php
+		}
+		if(!empty($result2))
+			include 'somersetOutcome.php';
+		else
+		{
+?>
+						<div  class="outcomeGraphic outcomeClass" style="height:500px">	
+		<h3 class="center" style="font-size:1.4em">Results Unavailable</h3>
+		<p style="font-size:1em" class="center">There are no outcome indicator data available to display for this section.</p>
+		</div>
+<?php
+		}
+		if(!empty($result5))
+			include 'somersetPolicy.php';
+		else
+		{
+?>
+		<div  class="" style="height:500px">	
+		<h3 class="center policyGraphic policy" style="font-size:1.4em">Results Unavailable</h3>
+		<p style="font-size:1em" class="center">There are no policy indicator data available to display for this section.</p>
+		</div>
+<?php
+		}
+		
+		if(!empty($result3))
+			include 'somersetEnvironmental.php';
+		else
+		{
+?>
+						<div  class="" style="height:500px">	
+		<h3 class="center environmentalGraphic environmental" style="font-size:1.4em">Results Unavailable</h3>
+		<p style="font-size:1em" class="center">There are no environmental indicator data available to display for this section.</p>
+		</div>
+<?php
+		}
+		
+		if(!empty($result4))
+			include 'somersetReach.php';
+		else
+		{
+?>
+		<div  class="reachGraphic reach" style="height:500px">	
+		<h3 class="center" style="font-size:1.4em">Results Unavailble</h3>
+		<p style="font-size:1em">There are no program reach indicator data available to display for this section.</p>
+		</div>
+
+<?php
+		}
+	}
 	
-	if(!empty($result5))
-		include 'somersetPolicy.php';
-	
-	if(!empty($result3))
-		include 'somersetEnvironmental.php';
-	
-	if(!empty($result4))
-		include 'somersetReach.php';
 ?>
 </section>
 </div>

@@ -1,4 +1,4 @@
-<h2 class="center environmental indicatorTitle">Environmental Indicators</h2>
+<h2 id="environmentalspot" class="center environmental indicatorTitle">Environmental Indicators</h2>
 <?php
 
 
@@ -183,11 +183,14 @@ foreach($result3 as $results3)
 	//display
 		echo"<h3 class='environmental center'>".$results3['indicatorTitle']."</h3>";
 	echo"<p class='environmental'><strong>Target:</strong>".$results3['targetLanguage']."</p>";
-	if($results3['graphType']=='barGraph'||$results3['graphType']=='lineGraph')
+	if($results3['graphType']=='barGraph')
 		echo"<div id='environmentalGraphic".$environmentalCounts."' class='environmentalGraphic environmental' style='width: 540px; height 300px; margin:20px auto;'></div>";
 
+	if($results3['graphType']=='lineGraph')
+		echo"<div id='environmentalGraphic".$environmentalCounts."' class='environmentalGraphic environmental bottom' style='width: 540px; height 300px; margin:20px auto;'></div>";
+
 	if($results3['graphType']=='speedometer')
-		echo"<div id='environmentalGraphic".$environmentalCounts."'' class='environmentalGraphic environmental' style='margin: 0 auto;''></div>";
+		echo"<div id='environmentalGraphic".$environmentalCounts."' class='environmentalGraphic environmental' style='margin: 0 auto;'></div>";
 
 	if($results3['graphType']=='arrowUp')
 		echo"<div  id='environmentalGraphic".$environmentalCounts."' class='environmentalGraphic environmental' style ='text-align:center; width: 540px; height: 250px; margin: 0 auto;'><img src='".$imagePath."' width='200px' height='200px'/></div>";

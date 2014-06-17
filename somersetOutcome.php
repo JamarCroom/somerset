@@ -1,4 +1,4 @@
-<h2 class="center outcomeClass indicatorTitle">Outcome Indicators</h2>
+<h2 id="outcomespot" class="center outcomeClass indicatorTitle">Outcome Indicators</h2>
 <?php
 
 
@@ -184,11 +184,14 @@ foreach($result2 as $results2)
 	//display
 		echo"<h3 class='outcomeClass center'>".$results2['indicatorTitle']."</h3>";
 	echo"<p class='outcomeClass'><strong>Target:</strong>".$results2['targetLanguage']."</p>";
-	if($results2['graphType']=='barGraph'||$results2['graphType']=='lineGraph')
+	if($results2['graphType']=='barGraph')
 		echo"<div id='outcomeGraphic".$counts."' class='outcomeGraphic outcomeClass' style='width: 540px; height 300px; margin:20px auto;'></div>";
 
+	if($results2['graphType']=='lineGraph')
+		echo"<div id='outcomeGraphic".$counts."' class='outcomeGraphic outcomeClass bottom' style='width: 540px; height 300px; margin:20px auto;'></div>";
+
 	if($results2['graphType']=='speedometer')
-		echo"<div id='outcomeGraphic".$counts."'' class='outcomeGraphic outcomeClass' style='margin: 0 auto;''></div>";
+		echo"<div id='outcomeGraphic".$counts."' class='outcomeGraphic outcomeClass' style='margin: 0 auto;'></div>";
 
 	if($results2['graphType']=='arrowUp')
 		echo"<div  id='outcomeGraphic".$counts."' class='outcomeGraphic outcomeClass' style ='text-align:center; width: 540px; height: 250px; margin: 0 auto;'><img src='".$imagePath."' width='200px' height='200px'/></div>";

@@ -1,4 +1,4 @@
-<h2 class="center reach indicatorTitle">Program Reach Indicators</h2>
+<h2 id="reachspot" class="center reach indicatorTitle">Program Reach Indicators</h2>
 <?php
 
 
@@ -183,11 +183,15 @@ foreach($result4 as $results4)
 	//display
 		echo"<h3 class='reach center'>".$results4['indicatorTitle']."</h3>";
 	echo"<p class='reach'><strong>Target:</strong>".$results4['targetLanguage']."</p>";
-	if($results4['graphType']=='barGraph'||$results4['graphType']=='lineGraph')
+	if($results4['graphType']=='barGraph')
 		echo"<div id='reachGraphic".$reachCounts."' class='reachGraphic reach' style='width: 540px; height 300px; margin:20px auto;'></div>";
 
+	if($results4['graphType']=='lineGraph')
+		echo"<div id='reachGraphic".$reachCounts."' class='reachGraphic reach bottom' style='width: 540px; height 300px; margin:20px auto;'></div>";
+
+
 	if($results4['graphType']=='speedometer')
-		echo"<div id='reachGraphic".$reachCounts."'' class='reachGraphic reach' style='margin: 0 auto;''></div>";
+		echo"<div id='reachGraphic".$reachCounts."' class='reachGraphic reach' style='margin: 0 auto;'></div>";
 
 	if($results4['graphType']=='arrowUp')
 		echo"<div  id='reachGraphic".$reachCounts."' class='reachGraphic reach' style ='text-align:center; width: 540px; height: 250px; margin: 0 auto;'><img src='".$imagePath."' width='200px' height='200px'/></div>";
