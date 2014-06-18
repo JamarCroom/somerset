@@ -1039,12 +1039,16 @@ body
 
 #header
 {
-	margin: 10px 0;
+	margin: 10px 0 10px 0px;
 	background-color: #000066;
 	border-radius:5px;
-position:fixed;
-}
 
+}
+#container
+{
+
+	position:fixed;
+}
 #nav_bar
 {
 
@@ -1067,7 +1071,8 @@ aside
 	border-radius: 5px;
 	color: white;
 	height: 600px;
-	/*position: fixed;*/
+	margin-top: 200px;
+	position: fixed;
 }
 p
 {
@@ -1114,6 +1119,8 @@ p
 	background-color: #FDFEFE;
 	border-radius: 5px;
 	height: 50px;
+	margin-top: 200px;
+	/*position: absolute;*/
 }
 .center
 {
@@ -1127,12 +1134,14 @@ p
 
 section
 {
-	float: right;
+	
 	width: 590px; 
 	background-color: #FDFEFE;
 	border-radius: 5px;
-	margin-top: 10px;
-
+	margin-top: 270px;
+	margin-left:360px;
+	position:absolute;
+	z-index: -1;
 }
 ul li ul li ul li
 {
@@ -1212,7 +1221,10 @@ hr
  	 background-color: #000066;
  	 border-radius: 5px;
  }
-
+.navigation:hover
+{
+	color: #104583;
+}
  nav ul li a
  {
  	width: 100%;
@@ -1265,13 +1277,14 @@ hr
 <script src="http://code.highcharts.com/adapters/standalone-framework.js"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <div id="wrapper">
-
+<div id="container">
 <div id="header"><img src="image/sommerset_logo.png" id="logo" style="vertical-align: middle; border-radius: 5px;"/><span id="logoWording">Somerset Public Health Web Dashboard</span></div>
-	<nav id="nav_bar"><ul><li><a href="somerset.php?contentArea=youthPAN">Youth PAN</a></li><li><a href="somerset.php?contentArea=adultPAN">Adult PAN</a></li>
-	<li><a href="somerset.php?contentArea=adultSubstanceAbuse">Adult Substance Abuse</a></li>
-	<li><a href="somerset.php?contentArea=youthSubstanceAbuse">Youth Substance Abuse</a></li>
+	<nav id="nav_bar"><ul><li><a class="navigation" href="somerset.php?contentArea=youthPAN">Youth PAN</a></li><li><a class="navigation" href="somerset.php?contentArea=adultPAN">Adult PAN</a></li>
+	<li><a class="navigation" href="somerset.php?contentArea=adultSubstanceAbuse">Adult Substance Abuse</a></li>
+	<li><a class="navigation" href="somerset.php?contentArea=youthSubstanceAbuse">Youth Substance Abuse</a></li>
 
-	<li><a href="somerset.php?contentArea=coalition">Coalition</a></li></ul></nav>
+	<li><a class="navigation" href="somerset.php?contentArea=coalition">Coalition</a></li></ul></nav>
+</div>
 <aside>
 <ul id = "mainSelection">
 	<li> <span id="goal"><img id="goalImage"src="image/plus.gif"/>Program Goal</span>
@@ -1320,11 +1333,19 @@ hr
 	<h2 id="PANHeadline" class="center Paytone"><?php echo "$content Indicators"; ?></h2>
 </div>
 <section>
-	<div class="instructions" style="height:500px">	
-<h3 class="center" style="font-size:1.4em">Instructions</h3>
-<p style="font-size:1em">Click on the expandable menu in the left pane to view GSPHC data dashboards.</p>
-</div>
 <?php
+
+	if(!empty($result1)|| !empty($result2)|| !empty($result3) || !empty($result4) || !empty($result5))
+	{
+	
+?>
+		<div class="instructions" style="height:500px">	
+			<h3 class="center" style="font-size:1.4em">Instructions</h3>
+			<p style="font-size:1em">Click on the expandable menu in the left pane to view GSPHC data dashboards.</p>
+		</div>
+<?php
+	{
+
 require_once 'include/dbaseConnect.inc';
 
 try
