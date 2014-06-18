@@ -7,12 +7,12 @@ if(!isset($_SESSION['logged_in']))
 
 else
 {
+	$modifiable=true;
 
-
-include 'include/head.inc';
+	include 'include/head.inc';
 
 ?>
-<h2>Add an indicator</h2>
+	<h2>Add an indicator</h2>
 	<form action="somersetAddProcess.php" method="POST">
 	<p>Select a content area: <select id="contentAreas"  name="contentArea" >
 		<option value=""></option>

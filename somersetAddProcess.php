@@ -1,8 +1,8 @@
 <?php
 session_start();
+	
 
-include_once 'include/head.inc';
-/*
+
 if(!isset($_SESSION['logged_in']))
 {
 
@@ -12,7 +12,10 @@ if(!isset($_SESSION['logged_in']))
 
 else
 {
-*/
+
+$modifiable=false;
+include_once 'include/head.inc';
+
 	if(isset($_POST['submit']))
 	{
 		$buildForm=true;
@@ -254,11 +257,20 @@ else
 				<p id="linegraph" class="hidden uniqueLine">Enter data for the line graph: (A minimum of 3 and a maximum of 5 data points can be used for the graph) <br/>
 				<table id="lineGraphData" class="hidden uniqueLine">
 <?php
-				$tableDataCount = 1;
-				foreach($years as $key=>$value)
+				if(!empty($years))
 				{
-					echo'<tr><td>Enter a year:<input type="text" class="disabledInput disabledGroupUnique" name="year[]" value="'.$years[$key].'"/></td><td>Enter data for that year:<input type="text" class="disabledInput  disabledGroupUnique" name="yearData[]" value="'.$yearData[$key].'"/></td></tr>';
-					$tableDataCount++;						
+					$tableDataCount = 1;
+					foreach($years as $key=>$value)
+					{
+						echo'<tr><td>Enter a year:<input type="text" class="disabledInput disabledGroupUnique" name="year[]" value="'.$years[$key].'"/></td><td>Enter data for that year:<input type="text" class="disabledInput  disabledGroupUnique" name="yearData[]" value="'.$yearData[$key].'"/></td></tr>';
+						$tableDataCount++;						
+					}
+				}
+				else
+				{
+					echo'<tr><td>Enter a year:<input type="text" class="disabledInput disabledGroupUnique" name="year[]" /></td><td>Enter data for that year:<input type="text" class="disabledInput  disabledGroupUnique" name="yearData[]" /></td></tr>';
+					echo'<tr><td>Enter a year:<input type="text" class="disabledInput disabledGroupUnique" name="year[]" /></td><td>Enter data for that year:<input type="text" class="disabledInput  disabledGroupUnique" name="yearData[]" /></td></tr>';
+					echo'<tr><td>Enter a year:<input type="text" class="disabledInput disabledGroupUnique" name="year[]" /></td><td>Enter data for that year:<input type="text" class="disabledInput  disabledGroupUnique" name="yearData[]" /></td></tr>';
 				}
 ?>
 			</table>
@@ -286,8 +298,8 @@ else
 
 	}
 
-/*
+	include 'include/foot.inc';
 }
-*/
-include 'include/foot.inc';
+
+
 ?>

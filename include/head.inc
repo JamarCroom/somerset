@@ -6,10 +6,7 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-<?php
-if(!isset($modifiable))
-{
-?>
+
 	$(function()
 	{
 			var yearNumber = 3;
@@ -30,6 +27,7 @@ if(!isset($modifiable))
 				return false;
 			});
 
+
 			$('#removeYear').on('click',function()
 			{
 				if(yearNumber>3)
@@ -45,6 +43,15 @@ if(!isset($modifiable))
 				return false;
 
 			});
+
+<?php
+if(isset($modifiable))
+	if($modifiable)
+	{
+{
+
+?>
+
 
 			$('#contentAreas').on('change',function()
 			{
@@ -144,10 +151,13 @@ if(!isset($modifiable))
 					$(':submit').prop('disabled');
 				}
 				
-			});
 <?php
+	}
 }
 ?>
+				
+			});
+
 
 
 
