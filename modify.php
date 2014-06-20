@@ -7,7 +7,7 @@ if(!isset($_SESSION['logged_in']))
 }
 else
 {
-	$modifiable=true;
+	$modifiable=false;
 	include 'include/head.inc';
 	echo "<h2 class='center'>Modify An Indicator</h2>";
 	$modifyPage= false;
@@ -73,10 +73,11 @@ else
 				$statement->execute();
 				$results=$statement->fetchAll();
 				$statement->closeCursor();
-				foreach($result as $results)
+				foreach($results as $result)
 				{
-					$years[] = $results['year'];
-					$yearData[] = $results['yearData'];
+					$years[] = $result['year'];
+					$yearData[] = $result['yearData'];
+					$yearIndicator[] = $result['yearId'];
 				}
 
 
@@ -144,11 +145,12 @@ else
 		{
 			$years=$_POST['year'];
 			$yearData=$_POST['yearData'];
-
+			$yearIndicator = $_POST['yearIndicator'];
 			foreach ($years as $key=>$value) 
 			{
 				$years[$key]=$validate->validNum($years[$key],'Enter a year');
 				$yearData[$key]=$validate->validNum($yearData[$key],'Enter data for that year');
+
 			}
 		}	
 
@@ -231,14 +233,15 @@ else
 					$statement3->execute();	
 					
 
-					$query2="UPDATE yearsTable SET year=:year, yearData=:yearData WHERE indicatorId=:indicatorId";
+					$query2="UPDATE yearsTable SET year=:year, yearData=:yearData WHERE yearId=:yearId";
 					foreach($years as $key=>$value)
 					{
 						$statement3 = $db->prepare($query2);
 						$statement3->bindValue(':year',$years[$key]);
 						$statement3->bindValue(':yearData',$yearData[$key]);
-						$statement3->bindValue(':indicatorId',$indicatorId);
+						$statement3->bindValue(':yearId',$yearIndicator[$key]);
 						$statement3->execute();
+						
 					}
 					$db->commit();
 
@@ -364,8 +367,9 @@ else
 				$tableDataCount = 1;
 				foreach($years as $key=>$value)
 				{
-					echo'<tr><td>Enter a year:<input type="text" class="disabledInput disabledGroupUnique" name="year[]" value="'.$years[$key].'"/></td><td>Enter data for that year:<input type="text" class="disabledInput  disabledGroupUnique" name="yearData[]" value="'.$yearData[$key].'"/></td></tr>';
-					$tableDataCount++;						
+					echo'<tr><td>Enter a year:<input type="text" class="disabledInput disabledGroupUnique" name="year[]" value="'.$years[$key].'"/></td><td>Enter data for that year:<input type="text" class="disabledInput  disabledGroupUnique" name="yearData[]" value="'.$yearData[$key].'"/><input type="hidden" name="yearIndicator[]" value="'.$yearIndicator[$key].'"/></td></tr>';
+					$tableDataCount++;
+											
 				}
 ?>
 			</table>

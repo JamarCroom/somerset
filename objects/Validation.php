@@ -155,7 +155,7 @@ class Validation
 	
 	public function validAlphaNum($input,$fieldname)
 	{
-		$pattern = "/^[A-Za-z0-9_'-\.$&!@;,()*\s]+$/";
+		$pattern = "/^[A-Za-z0-9_'-\.$&!%@;,()*\s]+$/";
 		$result= preg_match($pattern,$input);
 		if ($result ==0||!isset($input))
 		{

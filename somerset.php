@@ -1207,10 +1207,7 @@ hr
 	text-decoration: none;
 }
 
-.spots
-{
 
-}
  nav
  {
  	width: 950px;
@@ -1344,7 +1341,7 @@ hr
 			<p style="font-size:1em">Click on the expandable menu in the left pane to view GSPHC data dashboards.</p>
 		</div>
 <?php
-	{
+	}
 
 require_once 'include/dbaseConnect.inc';
 
@@ -1395,9 +1392,9 @@ catch(PDOException $e)
 	{
 ?>
 		<div  style="height:500px">	
-<h3 class="center" style="font-size:1.4em">Results Unavailble</h3>
-	<p style="font-size:1em" class="center">There are no indicators available to display for this section.</p>
-</div>
+		<h3 class="center" style="font-size:1.4em">Results Unavailable</h3>
+		<p style="font-size:1em" class="center">There are no indicators available to display for this section.</p>
+		</div>
 <?php
 	}
 	else
@@ -1407,10 +1404,10 @@ catch(PDOException $e)
 		else
 		{
 ?>
-			<div  style="height:500px">	
-		<h3 class="center" style="font-size:1.4em">Results Unavailable</h3>
-		<p style="font-size:1em" class="center">There are no program goal data available to display for this section.</p>
-		</div>
+			<div  class="goalClassGraphic" style="height:500px">	
+			<h3 class="center" style="font-size:1.4em">Results Unavailable</h3>
+			<p style="font-size:1em" class="center">There are no program goal data available to display for this section.</p>
+			</div>
 <?php
 		}
 		if(!empty($result2))
@@ -1418,10 +1415,10 @@ catch(PDOException $e)
 		else
 		{
 ?>
-						<div  class="outcomeGraphic outcomeClass" style="height:500px">	
-		<h3 class="center" style="font-size:1.4em">Results Unavailable</h3>
-		<p style="font-size:1em" class="center">There are no outcome indicator data available to display for this section.</p>
-		</div>
+			<div  id="outcomespot" class="outcomeGraphic outcomeClass" style="height:500px">	
+			<h3 class="center" style="font-size:1.4em">Results Unavailable</h3>
+			<p style="font-size:1em" class="center">There are no outcome indicator data available to display for this section.</p>
+			</div>
 <?php
 		}
 		if(!empty($result5))
@@ -1429,10 +1426,10 @@ catch(PDOException $e)
 		else
 		{
 ?>
-		<div  class="" style="height:500px">	
-		<h3 class="center policyGraphic policy" style="font-size:1.4em">Results Unavailable</h3>
-		<p style="font-size:1em" class="center">There are no policy indicator data available to display for this section.</p>
-		</div>
+			<div  id="policyspot" class="center policyGraphic policy" style="height:500px">	
+			<h3  style="font-size:1.4em">Results Unavailable</h3>
+			<p style="font-size:1em" class="center">There are no policy indicator data available to display for this section.</p>
+			</div>
 <?php
 		}
 		
@@ -1441,10 +1438,10 @@ catch(PDOException $e)
 		else
 		{
 ?>
-						<div  class="" style="height:500px">	
-		<h3 class="center environmentalGraphic environmental" style="font-size:1.4em">Results Unavailable</h3>
-		<p style="font-size:1em" class="center">There are no environmental indicator data available to display for this section.</p>
-		</div>
+			<div  id="environmentalspot" class="center environmentalGraphic environmental" style="height:500px">	
+			<h3  style="font-size:1.4em">Results Unavailable</h3>
+			<p style="font-size:1em" class="center">There are no environmental indicator data available to display for this section.</p>
+			</div>
 <?php
 		}
 		
@@ -1453,11 +1450,10 @@ catch(PDOException $e)
 		else
 		{
 ?>
-		<div  class="reachGraphic reach" style="height:500px">	
-		<h3 class="center" style="font-size:1.4em">Results Unavailble</h3>
-		<p style="font-size:1em">There are no program reach indicator data available to display for this section.</p>
-		</div>
-
+			<div  id="reachspot" class="reachGraphic reach" style="height:500px">	
+			<h3 class="center" style="font-size:1.4em">Results Unavailble</h3>
+			<p style="font-size:1em">There are no program reach indicator data available to display for this section.</p>
+			</div>
 <?php
 		}
 	}
