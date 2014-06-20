@@ -90,11 +90,11 @@ else
 ?>
 			<h2 class="center">Results</h2>
 			<table>
-				<thead><tr><th>Indicator Title</th><th>Content Area</th><th>Indicator Type</th><th>Indicator State</th><th>Toggle State</th><tr/></thead>
+				<thead><tr><th>Indicator Title</th><th>Content Area</th><th>Indicator Type</th><th>Indicator State</th><th>Date Created</th><th>Toggle State</th><tr/></thead>
 <?php
 				foreach($result as $results)
 				{
-					echo '<tr><td>'.ucwords($results['indicatorTitle']).'</td><td>'.$results['contentArea'].'</td><td>'.$results['graphType'].'</td><td>'.$results['indicatorState'].'</td><td><form action="toggleState.php" method="POST"><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"><input type="hidden" name="toggleState" value="'.$results['indicatorState'].'"><input type="submit" name="submit" value="On/Off" /></form></td></tr>';
+					echo '<tr><td>'.ucwords($results['indicatorTitle']).'</td><td>'.$results['contentArea'].'</td><td>'.$results['graphType'].'</td><td>'.$results['indicatorState'].'</td><td>'.$results['dateCreated'].'</td><td><form action="toggleState.php" method="POST"><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"><input type="hidden" name="toggleState" value="'.$results['indicatorState'].'"><input type="submit" name="submit" value="On/Off" /></form></td></tr>';
 				}
 ?>
 			</table>
@@ -114,11 +114,11 @@ else
 ?>
 	<h2 class="center">Results</h2>
 			<table>
-				<thead><tr><th>Indicator Title</th><th>Content Area</th><th>Indicator Type</th><th>Indicator State</th><th>Modify</th><tr/></thead>
+				<thead><tr><th>Indicator Title</th><th>Content Area</th><th>Indicator Type</th><th>Indicator State</th><th>Date Created</th><th>Modify</th><tr/></thead>
 <?php
 				foreach($result as $results)
 				{
-					echo '<tr><td>'.ucwords($results['indicatorTitle']).'</td><td>'.$results['contentArea'].'</td><td>'.$results['graphType'].'</td><td>'.$results['indicatorState'].'</td><td><form action="modify.php" method="POST"><input type="hidden" name="graphType" value="'.$results['graphType'].'"/><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"/><input type="submit" name="searchSubmit" value="Modify"/></form></td></tr>';
+					echo '<tr><td>'.ucwords($results['indicatorTitle']).'</td><td>'.$results['contentArea'].'</td><td>'.$results['graphType'].'</td><td>'.$results['indicatorState'].'</td><td>'.$results['dateCreated'].'</td><td><form action="modify.php" method="POST"><input type="hidden" name="graphType" value="'.$results['graphType'].'"/><input type="hidden" name="indicatorId" value="'.$results['indicatorId'].'"/><input type="submit" name="searchSubmit" value="Modify"/></form></td></tr>';
 				}
 ?>
 			</table>
