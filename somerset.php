@@ -916,13 +916,69 @@ function changeLink(changevar, change)
 		}
  	});
 	 
+	 var containerHeight = $('#container').height();
+	 var title = containerHeight + 25
+	 var section = containerHeight+ $('#title').height() -20;
+	 var left =$('section').offset().left;
+	 $(window).scroll(function()
+	 {
+	 	 $('aside').css(
+ 		{
+ 			top:200,
+			position: "fixed"
+
+		});
 	
+		$('#container').css(
+		{
+			top:5,
+			position: 'fixed'
+
+		});
+
+		$('section').css(
+		{
+			
+			position: 'absolute',
+			top: section,
+			zIndex: -1
+		});
+
+		$('#title').css(
+		{
+			position: 'absolute',
+			top: title,
+			left: left,
+			zIndex:-1
+		});
+
+	 });
+
 	$('#outcome').bind("click", function()
  	{
- 		changeLink("outcome","outcomeClass");
- 	});
+ 		
+ 		var topVal = Math.round($('#outcomespot').offset().top);
+ 		var asideVal=topVal;
+ 		var containerHeight = $('#container').height();
+ 		var topVal2 = (topVal-containerHeight);
+ 		
+ 		$('aside').css(
+ 		{
+ 			top: asideVal,
+			position: "absolute"
+
+		});
 	
-	
+		$('#container').css(
+		{
+			top: topVal2,
+			position: 'absolute'
+		});
+
+
+ 	$('#container')[0].scrollIntoView(true);
+});	
+/*	
 	 $('#policySuccess').bind("click", function()
  	{
  		changeLink("policySuccess","policy");
@@ -943,7 +999,7 @@ function changeLink(changevar, change)
 
  	});
 
-
+*/
 
 });	
 </script>
@@ -985,7 +1041,7 @@ function changeLink(changevar, change)
 	display: none;
 }
 */
-
+/*
 .outcomeClass
 {
 	display:none;
@@ -1005,7 +1061,7 @@ function changeLink(changevar, change)
 {
 	display:none;
 }
-
+*/
 ul
 {
 	list-style-type: none;
@@ -1039,15 +1095,16 @@ body
 
 #header
 {
-	margin: 10px 0 10px 0px;
+	margin: 2px 0 10px 0px;
 	background-color: #000066;
 	border-radius:5px;
-
+	/*position: fixed;*/
+	width: 950px;
 }
 #container
 {
 
-	position:fixed;
+	/*position: fixed;*/
 }
 #nav_bar
 {
@@ -1071,8 +1128,13 @@ aside
 	border-radius: 5px;
 	color: white;
 	height: 600px;
+
+/*	position: fixed;
+/*
 	margin-top: 200px;
+
 	position: fixed;
+	top: 180px;*/
 }
 p
 {
@@ -1119,8 +1181,13 @@ p
 	background-color: #FDFEFE;
 	border-radius: 5px;
 	height: 50px;
+	/*
 	margin-top: 200px;
-	/*position: absolute;*/
+	/*
+	position: absolute;
+	/*left: 440px;
+	top: 180px;
+	*/
 }
 .center
 {
@@ -1138,10 +1205,12 @@ section
 	width: 590px; 
 	background-color: #FDFEFE;
 	border-radius: 5px;
-	margin-top: 270px;
+	margin-top: 80px;
 	margin-left:360px;
-	position:absolute;
+	/*
+	position: absolute;
 	z-index: -1;
+	top: 240px;*/
 }
 ul li ul li ul li
 {
@@ -1149,7 +1218,7 @@ ul li ul li ul li
 }
 
 
-
+/*
 #listVars
 {
 	display:none;
@@ -1159,7 +1228,7 @@ ul li ul li ul li
 {
 	display:none;
 }
-
+*/
 /*
 body
 {
@@ -1217,6 +1286,7 @@ hr
  	padding-top:  5px;
  	 background-color: #000066;
  	 border-radius: 5px;
+
  }
 .navigation:hover
 {
@@ -1286,10 +1356,10 @@ hr
 <ul id = "mainSelection">
 	<li> <span id="goal"><img id="goalImage"src="image/plus.gif"/>Program Goal</span>
 	<ul id="listVars">
-				<li id="outcome"><a href="#outcomespot" class="spots">Outcome</a></li>
-				<li id="policySuccess"><a href="#policyspot" class="spots">Policy Success</a></li>
-				<li id="environmentalSupports"><a href="#environmentalspot" class="spots">Environmental Supports</a></li>
-				<li id="programReach"><a href="#reachspot" class="spots">Program Reach</a></li>		
+				<li id="outcome">Outcome</li>
+				<li id="policySuccess"><a href="#policyspot">Policy Success</a></li>
+				<li id="environmentalSupports"><a href="environmentalspot">Environmental Supports</a></li>
+				<li id="programReach"><a href="#reachspot">Program Reach</a></li>		
 	</ul>
 	</li>
 </ul>
