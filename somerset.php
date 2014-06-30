@@ -959,8 +959,8 @@ function changeLink(changevar, change)
  		
  		var topVal = Math.round($('#outcomespot').offset().top);
  		var asideVal=topVal;
- 		var containerHeight = $('#container').height();
- 		var topVal2 = (topVal-containerHeight);
+ 	
+ 		var topVal2 = (topVal-containerHeight)-5;
  		
  		$('aside').css(
  		{
@@ -978,28 +978,89 @@ function changeLink(changevar, change)
 
  	$('#container')[0].scrollIntoView(true);
 });	
-/*	
+
 	 $('#policySuccess').bind("click", function()
  	{
- 		changeLink("policySuccess","policy");
+ 		var topVal = Math.round($('#policyspot').offset().top);
+ 		var asideVal=topVal;
+ 		var topVal2 = (topVal-containerHeight)-5;
+ 		
+ 		$('aside').css(
+ 		{
+ 			top: asideVal,
+			position: "absolute"
 
+		});
+	
+		$('#container').css(
+		{
+			top: topVal2,
+			position: 'absolute'
+		});
+
+
+		$('#container')[0].scrollIntoView(true);
+ 		//changeLink("policySuccess","policy");
  	});
 	
 	
 	$('#environmentalSupports').bind("click", function()
  	{
- 		changeLink("environmentalSupports","environmental");
+ 		 var topVal = Math.round($('#environmentalspot').offset().top);
+ 		var asideVal=topVal;
+ 		var topVal2 = (topVal-containerHeight)-5;
+ 		
+ 		$('aside').css(
+ 		{
+ 			top: asideVal,
+			position: "absolute"
+
+		});
+	
+		$('#container').css(
+		{
+			top: topVal2,
+			position: 'absolute'
+		});
+
+
+		$('#container')[0].scrollIntoView(true);
+
+
+ 		//changeLink("environmentalSupports","environmental");
 
  	});
 	
 	
 	$('#programReach').bind("click", function()
  	{
-		changeLink("programReach","reach");
+ 		var topVal = Math.round($('#reachspot').offset().top);
+ 		var asideVal=topVal;
+ 		var topVal2 = (topVal-containerHeight);
+ 		
+ 		$('aside').css(
+ 		{
+ 			top: asideVal,
+			position: "absolute"
+
+		});
+	
+		$('#container').css(
+		{
+			top: topVal2,
+			position: 'absolute'
+		});
+
+
+		$('#container')[0].scrollIntoView(true);
+
+
+
+		//changeLink("programReach","reach");
 
  	});
 
-*/
+
 
 });	
 </script>
@@ -1357,9 +1418,9 @@ hr
 	<li> <span id="goal"><img id="goalImage"src="image/plus.gif"/>Program Goal</span>
 	<ul id="listVars">
 				<li id="outcome">Outcome</li>
-				<li id="policySuccess"><a href="#policyspot">Policy Success</a></li>
-				<li id="environmentalSupports"><a href="environmentalspot">Environmental Supports</a></li>
-				<li id="programReach"><a href="#reachspot">Program Reach</a></li>		
+				<li id="policySuccess">Policy Success</li>
+				<li id="environmentalSupports">Environmental Supports</li>
+				<li id="programReach">Program Reach</li>		
 	</ul>
 	</li>
 </ul>
@@ -1521,7 +1582,7 @@ catch(PDOException $e)
 		{
 ?>
 			<div  id="reachspot" class="reachGraphic reach" style="height:500px">	
-			<h3 class="center" style="font-size:1.4em">Results Unavailble</h3>
+			<h3 class="center" style="font-size:1.4em">Results Unavailable</h3>
 			<p style="font-size:1em">There are no program reach indicator data available to display for this section.</p>
 			</div>
 <?php
