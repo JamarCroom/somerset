@@ -894,7 +894,7 @@ function changeLink(changevar, change)
 
  	$('#goal').bind("click", function()
  	{
- 		//alert('hi');
+ 		
 		if(!varList)
 		{
 			$('#goalImage').attr("src","image/minus.gif");
@@ -915,11 +915,14 @@ function changeLink(changevar, change)
 		
 		}
  	});
-	 
-	 var containerHeight = $('#container').height();
-	 var title = containerHeight + 25
-	 var section = containerHeight+ $('#title').height() -20;
+	
+	 var containerHeight = $('#container').height()+5;
+	 var title = containerHeight + 20
+	 var section = (containerHeight + $('#title').height())-20;
 	 var left =$('section').offset().left;
+
+	 //alert(left);
+
 	 $(window).scroll(function()
 	 {
 	 	 $('aside').css(
@@ -975,8 +978,8 @@ function changeLink(changevar, change)
 			position: 'absolute'
 		});
 
-
- 	$('#container')[0].scrollIntoView(true);
+		$('#container')[0].scrollIntoView(true);
+ 	
 });	
 
 	 $('#policySuccess').bind("click", function()
@@ -1162,15 +1165,7 @@ body
 	/*position: fixed;*/
 	width: 950px;
 }
-#container
-{
 
-	/*position: fixed;*/
-}
-#nav_bar
-{
-
-}
 
 #logoWording
 {
@@ -1242,13 +1237,7 @@ p
 	background-color: #FDFEFE;
 	border-radius: 5px;
 	height: 50px;
-	/*
-	margin-top: 200px;
-	/*
-	position: absolute;
-	/*left: 440px;
-	top: 180px;
-	*/
+
 }
 .center
 {
@@ -1268,10 +1257,7 @@ section
 	border-radius: 5px;
 	margin-top: 80px;
 	margin-left:360px;
-	/*
-	position: absolute;
-	z-index: -1;
-	top: 240px;*/
+
 }
 ul li ul li ul li
 {
